@@ -36,3 +36,8 @@ textarea {
 .btn-primary {
   width: 100%;
 }
+
+.bold-red {
+  font-weight: bold;
+  color: red;
+}

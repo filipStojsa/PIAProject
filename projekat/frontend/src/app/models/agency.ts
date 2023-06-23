@@ -12,7 +12,7 @@ export class Agency {
     password: string
     tel: string
     email: string
-    image: Buffer
+    image: string
 
     comments: Array<Comment>
 }

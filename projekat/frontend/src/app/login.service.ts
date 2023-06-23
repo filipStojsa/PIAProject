@@ -18,4 +18,5 @@ export class LoginService {
 
     return this.http.post(`${this.uri}/user/login`, data)
   }
+
 }

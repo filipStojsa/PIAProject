@@ -23,12 +23,54 @@ class UserController {
                 }
             });
         };
-        this.test = (req, res) => {
-            user_1.default.findOne({ 'username': 'pera' }, (err, user) => {
+        this.register = (req, res) => {
+            let name = req.body.name;
+            let surname = req.body.surname;
+            let tel = req.body.tel;
+            let email = req.body.email;
+            let image = req.body.image;
+            let username = req.body.username;
+            let password = req.body.password;
+            user_1.default.insertMany([{
+                    name: name,
+                    surname: surname,
+                    tel: tel,
+                    email: email,
+                    image: image,
+                    username: username,
+                    password: password
+                }]);
+            res.json({ 'msg': 'OK' });
+        };
+        this.checkIsUsernameUnique = (req, res) => {
+            let username = req.body.username;
+            user_1.default.findOne({ 'username': username }, (err, user) => {
+                console.log(user);
                 if (err)
                     console.log(err);
                 else {
-                    res.json(user);
+                    if (user) {
+                        res.json({ 'msg': 'false' });
+                    }
+                    else {
+                        res.json({ 'msg': 'true' });
+                    }
+                }
+            });
+        };
+        this.checkIsEmailUnique = (req, res) => {
+            let email = req.body.email;
+            user_1.default.findOne({ 'email': email }, (err, user) => {
+                console.log(user);
+                if (err)
+                    console.log(err);
+                else {
+                    if (user) {
+                        res.json({ 'msg': 'false' });
+                    }
+                    else {
+                        res.json({ 'msg': 'true' });
+                    }
                 }
             });
         };
