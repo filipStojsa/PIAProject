@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
+const agency_1 = __importDefault(require("../models/agency"));
 class UserController {
     constructor() {
+        // Login for both User and Agency
         this.login = (req, res) => {
             let username = req.body.username;
             let password = req.body.password;
@@ -15,10 +17,29 @@ class UserController {
                     console.log(err);
                 else {
                     if (user) {
-                        res.json(user);
+                        res.json({
+                            "user": user,
+                            "type": "user"
+                        });
                     }
                     else {
-                        console.log('user is null');
+                        agency_1.default.findOne({ 'username': username, 'password': password }, (err1, agency) => {
+                            if (err1)
+                                console.log(err1);
+                            else {
+                                if (agency) {
+                                    res.json({
+                                        "agency": agency,
+                                        "type": "agency"
+                                    });
+                                }
+                                else {
+                                    res.json({
+                                        "type": "error"
+                                    });
+                                }
+                            }
+                        });
                     }
                 }
             });

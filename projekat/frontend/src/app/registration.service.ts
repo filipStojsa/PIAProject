@@ -25,16 +25,33 @@ export class RegistrationService {
   }
 
   registerAgency(agency: Agency) {
-    // TODO: First add models in backend
-    return this.http.post(`${this.uri}/users/register`, agency)
+    const data = {
+      agencyName: agency.agencyName,
+      state: agency.state,
+      city: agency.city,
+      adress: agency.adress,
+      pib: agency.pib,
+      description: agency.description,
+      username: agency.username,
+      password: agency.password,
+      tel: agency.tel,
+      email: agency.email,
+      image: agency.image
+    }
+    return this.http.post(`${this.uri}/agency/register`, data)
   }
   
-  checkIsUsernameUnique(usernameFromForm) {
+  checkIsUsernameUnique(usernameFromForm, type) {
     const data = {
       username: usernameFromForm
     }
 
-    return this.http.post(`${this.uri}/user/checkIsUsernameUnique`, data)
+    if(type == 'user') {
+      return this.http.post(`${this.uri}/user/checkIsUsernameUnique`, data)
+    }
+    else {
+      return this.http.post(`${this.uri}/agency/checkIsUsernameUnique`, data)
+    }
   }
 
   checkIsEmailUnique(emailFromForm) {

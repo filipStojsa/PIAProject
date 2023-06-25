@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    this.service.checkIsUsernameUnique(this.user.username).subscribe((resp) => {
+    this.service.checkIsUsernameUnique(this.user.username, 'user').subscribe((resp) => {
       if(resp['msg'] == 'false') {
         this.messageUser[2] = "Username is not unique"
         isOK = false
@@ -142,13 +142,13 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    // Check user's username validity
-    if(!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(this.user.username)) {
+    // Check agency's username validity
+    if(!/^(?=.*[a-zA-Z])(?=.*\d).+$/.test(this.agency.username)) {
       this.messageAgency[5] = "Username does not enforce the rules"
       isOK = false
     }
 
-    this.service.checkIsUsernameUnique(this.user.username).subscribe((resp) => {
+    this.service.checkIsUsernameUnique(this.agency.username, 'agency').subscribe((resp) => {
       if(resp['msg'] == 'false') {
         this.messageAgency[5] = "Username is not unique"
         isOK = false
@@ -156,19 +156,19 @@ export class RegisterComponent implements OnInit {
     })
 
     // Check user's password validity
-    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.user.password)) {
+    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.agency.password)) {
       this.messageAgency[6] = "Password does not enforce the rules"
       isOK = false
     }
 
     // Check user's telephone validity
-    if(!/^(?:(?:\+|00)(?:\d{1,3})[\s-]?)?(?:\d{1,4}[\s-]?){1,5}\d{1,4}$/.test(this.user.tel)) {
+    if(!/^(?:(?:\+|00)(?:\d{1,3})[\s-]?)?(?:\d{1,4}[\s-]?){1,5}\d{1,4}$/.test(this.agency.tel)) {
       this.messageAgency[7] = "Telephone is not in correct format"
       isOK = false
     }
 
     // Check user's email validity
-    if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.user.email)) {
+    if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.agency.email)) {
       this.messageAgency[8] = "Email is not in correct format"
       isOK = false
     }
@@ -203,7 +203,9 @@ export class RegisterComponent implements OnInit {
       if(this.checkAgencyFields()) {
         this.agency.image = this.image
         this.service.registerAgency(this.agency).subscribe((resp) => {
-          // Handle response...
+          if(resp['msg'] == 'OK') {
+            alert('Agency is added succesfuly!')
+          }
         })
       }
     }

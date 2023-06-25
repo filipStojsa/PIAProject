@@ -1,7 +1,11 @@
 import express from 'express'
 import UserModel from '../models/user'
+import AgencyModel from '../models/agency'
+
 
 export class UserController{
+
+    // Login for both User and Agency
     login = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let password = req.body.password;
@@ -10,10 +14,28 @@ export class UserController{
             if(err) console.log(err);
             else {
                 if(user) {
-                    res.json(user)
+                    res.json({
+                        "user": user,
+                        "type": "user"
+                    })
                 }
                 else {
-                    console.log('user is null')
+                    AgencyModel.findOne({'username': username, 'password': password}, (err1, agency)=>{
+                        if(err1) console.log(err1);
+                        else {
+                            if(agency) {
+                                res.json({
+                                    "agency": agency,
+                                    "type": "agency"
+                                })
+                            }
+                            else {
+                                res.json({
+                                    "type": "error"
+                                })
+                            }
+                        }
+                    })
                 }
             }
         })
