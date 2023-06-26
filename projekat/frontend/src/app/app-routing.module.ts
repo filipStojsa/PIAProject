@@ -4,12 +4,16 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { AgencyComponent } from './agency/agency.component';
+import { GeneralComponent } from './general/general.component';
+import { AgencyDetailsComponent } from './agency-details/agency-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "user", component: UserComponent},
-  {path: "agency", component: AgencyComponent}
+  {path: "agency", component: AgencyComponent},
+  {path: "general", component: GeneralComponent},
+  {path: "general/details", component: AgencyDetailsComponent}
 ];
 
 @NgModule({

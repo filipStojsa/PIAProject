@@ -1,0 +1,18 @@
+<head>
+    <title>Agency List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="agency-list">
+        <div class="card-deck" *ngFor="let agency of allAgencies">
+            <div class="card agency-card">
+                <img src={{agency.image}} class="card-img-top" alt="Agency 1">
+                <div class="card-body">
+                    <h5 class="card-title">{{agency.agencyName}}</h5>
+                    <h6>{{agency.description}}</h6>
+                </div>
+                <button class="btn btn-primary" (click)="seeMore(agency.username)">See more</button>
+            </div>
+        </div>
+    </div>
+</body>

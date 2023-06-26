@@ -19,7 +19,7 @@ let Agency = new Schema({
         type: String
     },
     pib: {
-        type: Number
+        type: String
     },
     description: {
         type: String

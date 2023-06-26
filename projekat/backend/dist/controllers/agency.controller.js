@@ -60,6 +60,18 @@ class AgencyController {
             // To be implemented...
             console.log('To be implemented - checkIsEmailUnique...');
         };
+        this.getAllAgencies = (req, res) => {
+            agency_1.default.find({}, (err, agencies) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (agencies) {
+                        console.log('Found some agencies...');
+                        res.json(agencies);
+                    }
+                }
+            });
+        };
     }
 }
 exports.AgencyController = AgencyController;

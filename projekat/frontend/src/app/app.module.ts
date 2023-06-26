@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { AgencyComponent } from './agency/agency.component';
+import { GeneralComponent } from './general/general.component';
+import { AgencyDetailsComponent } from './agency-details/agency-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AgencyComponent } from './agency/agency.component';
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    AgencyComponent
+    AgencyComponent,
+    GeneralComponent,
+    AgencyDetailsComponent
   ],
   imports: [
     BrowserModule,

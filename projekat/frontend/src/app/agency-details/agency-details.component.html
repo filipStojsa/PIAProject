@@ -1,0 +1,88 @@
+<head>
+    <title>Agency Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+<body>
+    <div *ngIf="agency">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+          <h2>Agency Details</h2>
+          
+          <div class="agency-details">
+              <h5>Agency Name:</h5>
+              <p id="agencyName">{{agency.agencyName}}</p>
+            </div>
+
+            <hr>
+            
+            <div class="agency-details">
+                <h5>State:</h5>
+            <p id="state">{{agency.state}}</p>
+        </div>
+        
+        <hr>
+        
+        <div class="agency-details">
+            <h5>City:</h5>
+            <p id="city">{{agency.city}}</p>
+          </div>
+
+          <hr>
+          
+          <div class="agency-details">
+              <h5>Address:</h5>
+              <p id="address">{{agency.adress}}</p>
+            </div>
+
+            <hr>
+            
+            <div class="agency-details">
+                <h5>PIB:</h5>
+                <p id="pib">{{agency.pib}}</p>
+            </div>
+            
+            <hr>
+            
+            <div class="agency-details">
+                <h5>Description:</h5>
+                <p id="description">{{agency.description}}</p>
+            </div>
+            
+            <hr>
+            
+            <div class="agency-details">
+                <h5>Username:</h5>
+                <p id="username">{{agency.username}}</p>
+            </div>
+
+            <hr>
+            
+            <div class="agency-details">
+                <h5>Telephone:</h5>
+            <p id="tel">{{agency.tel}}</p>
+        </div>
+
+          <hr>
+          
+          <div class="agency-details">
+              <h5>Email:</h5>
+              <p id="email">{{agency.email}}</p>
+            </div>
+            
+            <hr>
+            
+            <h3>Comments</h3>
+            <div *ngFor="let com of comments">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>{{com.user}}</strong> - Rating: {{com.rating}} - <i>{{com.comment}}</i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>

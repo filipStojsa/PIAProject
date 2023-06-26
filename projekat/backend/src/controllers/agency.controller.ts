@@ -60,4 +60,16 @@ export class AgencyController{
         console.log('To be implemented - checkIsEmailUnique...')
     }
 
+    getAllAgencies = (req: express.Request, res: express.Response) => {
+        AgencyModel.find({}, (err, agencies) => {
+            if(err) console.log(err)
+            else {
+                if(agencies) {
+                    console.log('Found some agencies...')
+                    res.json(agencies)
+                }
+            }
+        })
+    }
+
 }
