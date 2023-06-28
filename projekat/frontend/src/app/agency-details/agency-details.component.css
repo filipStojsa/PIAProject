@@ -2,11 +2,6 @@ body {
     padding: 20px;
 }
 
-.agency-details {
+.user-details {
     margin-bottom: 20px;
-}
-
-.agency-image {
-    max-width: 200px;
-    max-height: 200px;
 }

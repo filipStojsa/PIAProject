@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: LoginService, private router: Router) { }
 
   ngOnInit(): void {
+    localStorage.clear()
   }
   
   username: string
@@ -25,10 +26,12 @@ export class LoginComponent implements OnInit {
       if(resp['type'] != 'error') {
         if(resp['type'] == 'user') {
           let user: User = resp['user']
+          localStorage.setItem('loggedUser', JSON.stringify(user))
           this.router.navigate(['user']);
         }
         else {
           let agency: Agency = resp['agency']
+          localStorage.setItem('loggedAgency', JSON.stringify(agency))
           this.router.navigate(['agency']);
         }
       }

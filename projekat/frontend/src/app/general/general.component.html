@@ -4,6 +4,17 @@
 </head>
 <body>
     <div class="agency-list">
+        <div class="search-bar">
+            <label for="search-field-name">Search by name: </label> 
+            <input type="text" name="search-field--name" (change)="searchByName()" [(ngModel)]="searchStringName">
+            
+            <label for="search-field-address">Search by address: </label> 
+            <input type="text" name="search-field-address" (change)="searchByAddress()" [(ngModel)]="searchStringAddress">
+
+            <button (click)="sort('asc')">Ascending</button>
+            <button (click)="sort('desc')">Descending</button>
+        </div>
+
         <div class="card-deck" *ngFor="let agency of allAgencies">
             <div class="card agency-card">
                 <img src={{agency.image}} class="card-img-top" alt="Agency 1">

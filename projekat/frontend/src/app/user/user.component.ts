@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  loggedUser : User
 
   ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'))
+  }
+
+  gotoDetails() {
+    this.router.navigate(['user/details']);
   }
 
 }

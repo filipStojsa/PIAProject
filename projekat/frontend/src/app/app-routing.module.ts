@@ -6,6 +6,7 @@ import { UserComponent } from './user/user.component';
 import { AgencyComponent } from './agency/agency.component';
 import { GeneralComponent } from './general/general.component';
 import { AgencyDetailsComponent } from './agency-details/agency-details.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: "user", component: UserComponent},
   {path: "agency", component: AgencyComponent},
   {path: "general", component: GeneralComponent},
-  {path: "general/details", component: AgencyDetailsComponent}
+  {path: "general/details", component: AgencyDetailsComponent},
+  {path: "user/details", component: UserDetailsComponent}
 ];
 
 @NgModule({
