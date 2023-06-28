@@ -1,2 +1,17 @@
-<h1>Hi {{loggedUser.name}} {{loggedUser.surname}}</h1>
-<button (click)="gotoDetails()">See my details</button>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  />
+</head>
+<div class="container">
+  <h1>Hi {{ loggedUser.name }} {{ loggedUser.surname }}</h1>
+  <button class="btn btn-primary" (click)="gotoDetails()">
+    See my details
+  </button>
+  <br />
+  <br />
+  <button class="btn btn-success" (click)="gotoCreateObject()">
+    Create object
+  </button>
+</div>

@@ -12,6 +12,7 @@ import { AgencyComponent } from './agency/agency.component';
 import { GeneralComponent } from './general/general.component';
 import { AgencyDetailsComponent } from './agency-details/agency-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserObjectComponent } from './user-object/user-object.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     AgencyComponent,
     GeneralComponent,
     AgencyDetailsComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserObjectComponent
   ],
   imports: [
     BrowserModule,

@@ -20,5 +20,9 @@ export class UserComponent implements OnInit {
   gotoDetails() {
     this.router.navigate(['user/details']);
   }
+  
+  gotoCreateObject() {
+    this.router.navigate(['user/create_object']);
+  }
 
 }
