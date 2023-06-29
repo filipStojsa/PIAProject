@@ -95,6 +95,11 @@ class UserController {
                 }
             });
         };
+        this.get = (req, res) => {
+            // throw new Error('Method not implemented.')
+            console.log('get');
+            res.json({ 'msg': 'ok' });
+        };
     }
 }
 exports.UserController = UserController;

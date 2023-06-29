@@ -3,6 +3,6 @@ export class Room {
     x: number
     y: number
     width: number
-    heigth: number
+    height: number
     color: string
 }

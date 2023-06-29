@@ -10,5 +10,6 @@ userRouter.route('/checkIsUsernameUnique').post((req, res) => new user_controlle
 userRouter.route('/checkIsEmailUnique').post((req, res) => new user_controller_1.UserController().checkIsEmailUnique(req, res));
 userRouter.route('/login').post((req, res) => new user_controller_1.UserController().login(req, res));
 userRouter.route('/register').post((req, res) => new user_controller_1.UserController().register(req, res));
+userRouter.route('/get').get((req, res) => new user_controller_1.UserController().get(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map

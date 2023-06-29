@@ -95,4 +95,10 @@ export class UserController{
         })
     }
 
+    get = (req: express.Request, res: express.Response) => {
+        // throw new Error('Method not implemented.')
+        console.log('get')
+        res.json({'msg': 'ok'})
+    }
+
 }

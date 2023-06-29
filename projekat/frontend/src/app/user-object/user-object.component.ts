@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Room } from '../models/rooms';
 import { ObjectService } from '../object.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-user-object',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UserObjectComponent implements OnInit {
 
-  constructor(private service: ObjectService, private router: Router) { }
+  constructor(private service: LoginService, private router: Router) { }
 
   type: string
   address: string
@@ -96,24 +97,32 @@ export class UserObjectComponent implements OnInit {
       this.message = ''
     }
 
-    let rooms = Array<Room>
+    let rooms: Array<Room> = []
     if(this.rooms == 1) {
       rooms[0] = this.createRoom(150, 100, 180, 120)
-      // TODO...
     }
     else if (this.rooms == 2) {
-      
+      rooms[0] = this.createRoom(250, 50, 150, 120)
+      rooms[1] = this.createRoom(150, 50, 100, 200)
     }
     else {
-      
+      rooms[0] = this.createRoom(250, 50, 150, 120)
+      rooms[1] = this.createRoom(150, 50, 100, 200)
+      rooms[2] = this.createRoom(250, 170, 300, 80)
     }
-
+    this.service.addObject(
+      this.type, this.address, this.rooms, this.area, 
+      JSON.parse(localStorage.getItem('loggedUser')).username,
+      rooms
+    ).subscribe((resp) => {
+      console.log('ivana je sigurna')
+    })
   }
 
   createRoom(x: number, y: number, w: number, h: number) {
-    let newRoom: Room
+    let newRoom: Room = new Room
     newRoom.color = 'white'
-    newRoom.heigth = h
+    newRoom.height = h
     newRoom.width = w
     newRoom.x = x
     newRoom.y = y

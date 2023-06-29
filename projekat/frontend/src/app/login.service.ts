@@ -19,4 +19,18 @@ export class LoginService {
     return this.http.post(`${this.uri}/user/login`, data)
   }
 
+  addObject(type, address, num, area, user, rooms) {
+    const data = {
+      type: type,
+      address: address,
+      num: num,
+      area: area,
+      user: user,
+      status: 'pending',
+      rooms: rooms
+    }
+
+    return this.http.post(`${this.uri}/object/addObject`, data)
+  }
+
 }
