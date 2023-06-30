@@ -19,6 +19,15 @@ export class AgencyDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.agency = JSON.parse(localStorage.getItem('agency'))
     this.comments = this.agency.comments
+    if(!JSON.parse(localStorage.getItem('loggedUser'))) {
+      // A user is not logged in
+      this.comments.forEach(com => {
+        const firstLetter = com.user.charAt(0);
+        const spaceIndex = com.user.indexOf(' ');
+        const letterAfterSpace = com.user.charAt(spaceIndex + 1);
+        com.user = firstLetter + '*** ' + letterAfterSpace + '***'
+      });
+    }
   }
 
 }

@@ -21,7 +21,7 @@ export class GeneralComponent implements OnInit {
       this.allAgencies = agencies
       this.allAgenciesReceived = agencies
     })
-    localStorage.clear()
+    // localStorage.clear()
   }
 
   seeMore(username: String) {
