@@ -6,12 +6,26 @@
 </head>
 <div class="container">
   <h1>Hi {{ loggedUser.name }} {{ loggedUser.surname }}</h1>
-  <button class="btn btn-primary" (click)="gotoDetails()">
+  <hr />
+  <button class="btn btn-secondary" (click)="gotoDetails()">
     See my details
   </button>
   <br />
   <br />
-  <button class="btn btn-success" (click)="gotoCreateObject()">
+  <button class="btn btn-secondary" (click)="gotoCreateObject()">
     Create object
+  </button>
+  <br />
+  <br />
+  <button class="btn btn-secondary" (click)="gotoGeneral()">
+    See agencies
+  </button>
+  <br />
+  <br />
+  <button class="btn btn-secondary">My jobs</button>
+  <br />
+  <br />
+  <button class="btn btn-secondary" (click)="gotoCreateJob()">
+    Create New Job
   </button>
 </div>

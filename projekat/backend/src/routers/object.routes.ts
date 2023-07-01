@@ -11,4 +11,16 @@ objectRouter.route('/get').get(
     (req, res) => new ObjectController().get(req, res)
 )
 
+objectRouter.route('/getMyObjects/:username').get(
+    (req, res) => new ObjectController().getMyObjects(req, res)
+)
+
+objectRouter.route('/addJob').post(
+    (req, res) => new ObjectController().addJob(req, res)
+)
+
+objectRouter.route('/getObject/:id').get(
+    (req, res) => new ObjectController().getObject(req, res)
+)
+
 export default objectRouter;

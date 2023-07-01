@@ -25,4 +25,12 @@ export class UserComponent implements OnInit {
     this.router.navigate(['user/create_object']);
   }
 
+  gotoGeneral() {
+    this.router.navigate(['general']);
+  }
+
+  gotoCreateJob() {
+    this.router.navigate(['user/create_job']);
+  }
+
 }

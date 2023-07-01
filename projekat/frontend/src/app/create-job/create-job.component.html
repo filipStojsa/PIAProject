@@ -1,0 +1,40 @@
+<!-- app.component.html -->
+<div>
+  <label for="agency">Agency:</label>
+  <select id="agency" [(ngModel)]="selectedAgency">
+    <option *ngFor="let agency of agencies" [value]="agency.username">
+      {{ agency.agencyName }}
+    </option>
+  </select>
+  <div class="red-text">
+    {{ message[0] }}
+  </div>
+</div>
+
+<div>
+  <label for="objects">Objects:</label>
+  <select id="objects" [(ngModel)]="selectedObject">
+    <option *ngFor="let object of objects" [value]="object._id">
+      {{ object.type }} at {{ object.address }}
+    </option>
+  </select>
+  <div class="red-text">
+    {{ message[1] }}
+  </div>
+</div>
+
+<div>
+  <label for="startDate">Starting Date:</label>
+  <input type="date" id="startDate" [(ngModel)]="startDate" />
+</div>
+
+<div>
+  <label for="endDate">Ending Date:</label>
+  <input type="date" id="endDate" [(ngModel)]="endDate" />
+  <div class="red-text">
+    {{ message[2] }}
+    {{ message[3] }}
+  </div>
+</div>
+
+<button (click)="submit()">Submit</button>

@@ -25,4 +25,8 @@ export class ObjectService {
     console.log(data)
     return this.http.post(`${this.uri}/object/addObject`, data)
   }
+
+  getMyObjects(username: string) {
+    return this.http.get(`${this.uri}/object/getMyObjects/${username}`)
+  }
 }
