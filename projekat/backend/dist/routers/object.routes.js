@@ -9,6 +9,7 @@ const objectRouter = express_1.default.Router();
 objectRouter.route('/addObject').post((req, res) => new object_controller_1.ObjectController().addObject(req, res));
 objectRouter.route('/get').get((req, res) => new object_controller_1.ObjectController().get(req, res));
 objectRouter.route('/getMyObjects/:username').get((req, res) => new object_controller_1.ObjectController().getMyObjects(req, res));
+objectRouter.route('/getMyJobs/:username').get((req, res) => new object_controller_1.ObjectController().getMyJobs(req, res));
 objectRouter.route('/addJob').post((req, res) => new object_controller_1.ObjectController().addJob(req, res));
 objectRouter.route('/getObject/:id').get((req, res) => new object_controller_1.ObjectController().getObject(req, res));
 exports.default = objectRouter;

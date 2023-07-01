@@ -1,1 +1,20 @@
-<p>jobs works!</p>
+<table>
+    <thead>
+      <tr>
+        <th>Agency Username</th>
+        <th>Job Status</th>
+        <th>Object</th>
+        <th>Start</th>
+        <th>End</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of myJobs">
+        <td>{{ job.agencyUsername }}</td>
+        <td>{{ job.jobStatus }}</td>
+        <td>{{ job.object }}</td>
+        <td>{{ job.start | date }}</td>
+        <td>{{ job.end | date }}</td>
+      </tr>
+    </tbody>
+  </table>

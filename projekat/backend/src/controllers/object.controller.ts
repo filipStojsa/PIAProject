@@ -52,6 +52,18 @@ export class ObjectController {
       });
   };
 
+  getMyJobs = (req: express.Request, res: express.Response) => {
+    let username = req.params.username;
+    JobModel.find({ "username" : username })
+      .then((jobs) => {
+        res.json(jobs);
+      })
+      .catch((err) => {
+        console.error("Failed to retrieve jobs", err);
+        res.status(500).json({ error: "Failed to retrieve jobs" });
+      });
+  };
+
   addJob = (req: express.Request, res: express.Response) => {
     let objectsId = req.body.selectedObject
     let agencyUsername = req.body.selectedAgency

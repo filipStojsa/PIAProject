@@ -48,6 +48,17 @@ class ObjectController {
                 res.status(500).json({ error: "Failed to retrieve objects" });
             });
         };
+        this.getMyJobs = (req, res) => {
+            let username = req.params.username;
+            job_1.default.find({ "username": username })
+                .then((jobs) => {
+                res.json(jobs);
+            })
+                .catch((err) => {
+                console.error("Failed to retrieve jobs", err);
+                res.status(500).json({ error: "Failed to retrieve jobs" });
+            });
+        };
         this.addJob = (req, res) => {
             let objectsId = req.body.selectedObject;
             let agencyUsername = req.body.selectedAgency;

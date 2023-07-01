@@ -13,7 +13,7 @@ let Job = new Schema({
         type: String
     },
     object: {
-        type: Object
+        type: String
     },
     start: {
         type: Date

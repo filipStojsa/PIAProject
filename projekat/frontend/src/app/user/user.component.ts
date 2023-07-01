@@ -33,4 +33,8 @@ export class UserComponent implements OnInit {
     this.router.navigate(['user/create_job']);
   }
 
+  gotoMyJobs() {
+    this.router.navigate(['user/my_jobs']);
+  }
+
 }

@@ -19,4 +19,12 @@ export class JobService {
 
     return this.http.post(`${this.uri}/object/addJob`, data)
   }
+
+  getMyJobs(username: string) {
+    return this.http.get(`${this.uri}/object/getMyJobs/${username}`)
+  }
+
+  getObject(id) {
+    return this.http.get(`${this.uri}/object/getObject/${id}`)
+  }
 }
