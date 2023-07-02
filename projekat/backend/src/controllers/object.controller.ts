@@ -42,7 +42,7 @@ export class ObjectController {
 
   getMyObjects = (req: express.Request, res: express.Response) => {
     let username = req.params.username;
-    ObjekatModel.find({ "user" : username })
+    ObjekatModel.find({ user: username })
       .then((objects) => {
         res.json(objects);
       })
@@ -54,7 +54,7 @@ export class ObjectController {
 
   getMyJobs = (req: express.Request, res: express.Response) => {
     let username = req.params.username;
-    JobModel.find({ "username" : username })
+    JobModel.find({ username: username })
       .then((jobs) => {
         res.json(jobs);
       })
@@ -65,26 +65,28 @@ export class ObjectController {
   };
 
   addJob = (req: express.Request, res: express.Response) => {
-    let objectsId = req.body.selectedObject
-    let agencyUsername = req.body.selectedAgency
-    let startDate = req.body.startDate
-    let endDate = req.body.endDate
-    let username = req.body.username
+    let objectsId = req.body.selectedObject;
+    let agencyUsername = req.body.selectedAgency;
+    let startDate = req.body.startDate;
+    let endDate = req.body.endDate;
+    let username = req.body.username;
 
-    JobModel.insertMany([{
-      username: username,
-      agencyUsername: agencyUsername,
-      jobStatus: 'pending',
-      object: objectsId,
-      start: startDate,
-      end: endDate
-    }])
+    JobModel.insertMany([
+      {
+        username: username,
+        agencyUsername: agencyUsername,
+        jobStatus: "pending",
+        object: objectsId,
+        start: startDate,
+        end: endDate,
+      },
+    ]);
 
-    res.json({ 'msg' : 'ok' })
-  }
+    res.json({ msg: "ok" });
+  };
 
   getObject = (req: express.Request, res: express.Response) => {
-    let _id = req.params.id
+    let _id = req.params.id;
     ObjekatModel.findOne({ _id })
       .then((objects) => {
         res.json(objects);
@@ -93,10 +95,10 @@ export class ObjectController {
         console.error("Failed to retrieve objects", err);
         res.status(500).json({ error: "Failed to retrieve objects" });
       });
-  }
+  };
 
   getJob = (req: express.Request, res: express.Response) => {
-    let _id = req.params.id
+    let _id = req.params.id;
     JobModel.findOne({ _id })
       .then((job) => {
         res.json(job);
@@ -105,5 +107,23 @@ export class ObjectController {
         console.error("Failed to retrieve job", err);
         res.status(500).json({ error: "Failed to retrieve job" });
       });
-  }
+  };
+
+  payJob = (req: express.Request, res: express.Response) => {
+    let _id = req.body._id;
+    console.log(_id)
+    JobModel.updateOne(
+      { _id : _id },
+      { $set: { jobStatus: "finished" } },
+      { new: true },
+      (err, updatedJob) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedJob);
+          res.json({ msg: "ok" });
+        }
+      }
+    );
+  };
 }

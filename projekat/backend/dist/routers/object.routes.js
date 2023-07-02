@@ -13,5 +13,6 @@ objectRouter.route('/getMyJobs/:username').get((req, res) => new object_controll
 objectRouter.route('/addJob').post((req, res) => new object_controller_1.ObjectController().addJob(req, res));
 objectRouter.route('/getObject/:id').get((req, res) => new object_controller_1.ObjectController().getObject(req, res));
 objectRouter.route('/getJob/:id').get((req, res) => new object_controller_1.ObjectController().getJob(req, res));
+objectRouter.route('/payJob').post((req, res) => new object_controller_1.ObjectController().payJob(req, res));
 exports.default = objectRouter;
 //# sourceMappingURL=object.routes.js.map

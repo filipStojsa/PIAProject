@@ -36,6 +36,11 @@
           <li class="list-group-item">
             <canvas #canvas width="600" height="300"></canvas>
           </li>
+          <li class="list-group-item" *ngIf="showButton()">
+            <button class="btn btn-success" (click)="payJob()">
+              Plati
+            </button>
+          </li>
         </ul>
       </ul>
     </div>

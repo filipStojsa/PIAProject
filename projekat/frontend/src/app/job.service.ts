@@ -31,4 +31,11 @@ export class JobService {
   getJob(id) {
     return this.http.get(`${this.uri}/object/getJob/${id}`)
   }
+
+  payJob(id) {
+    const data = {
+      _id: id
+    }
+    return this.http.post(`${this.uri}/object/payJob`, data)
+  }
 }

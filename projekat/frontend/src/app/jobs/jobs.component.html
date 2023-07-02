@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let job of myJobs">
+      <tr *ngFor="let job of myJobs" [ngStyle]="{ 'background-color': getRowColor(job.jobStatus) }">
         <td>{{ job.agencyUsername }}</td>
         <td>{{ job.jobStatus }}</td>
         <td>{{ job.display }}</td>

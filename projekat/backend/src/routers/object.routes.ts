@@ -31,4 +31,8 @@ objectRouter.route('/getJob/:id').get(
     (req, res) => new ObjectController().getJob(req, res)
 )
 
+objectRouter.route('/payJob').post(
+    (req, res) => new ObjectController().payJob(req, res)
+)
+
 export default objectRouter;

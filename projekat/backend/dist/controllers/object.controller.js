@@ -39,7 +39,7 @@ class ObjectController {
         };
         this.getMyObjects = (req, res) => {
             let username = req.params.username;
-            object_1.default.find({ "user": username })
+            object_1.default.find({ user: username })
                 .then((objects) => {
                 res.json(objects);
             })
@@ -50,7 +50,7 @@ class ObjectController {
         };
         this.getMyJobs = (req, res) => {
             let username = req.params.username;
-            job_1.default.find({ "username": username })
+            job_1.default.find({ username: username })
                 .then((jobs) => {
                 res.json(jobs);
             })
@@ -65,15 +65,17 @@ class ObjectController {
             let startDate = req.body.startDate;
             let endDate = req.body.endDate;
             let username = req.body.username;
-            job_1.default.insertMany([{
+            job_1.default.insertMany([
+                {
                     username: username,
                     agencyUsername: agencyUsername,
-                    jobStatus: 'pending',
+                    jobStatus: "pending",
                     object: objectsId,
                     start: startDate,
-                    end: endDate
-                }]);
-            res.json({ 'msg': 'ok' });
+                    end: endDate,
+                },
+            ]);
+            res.json({ msg: "ok" });
         };
         this.getObject = (req, res) => {
             let _id = req.params.id;
@@ -95,6 +97,19 @@ class ObjectController {
                 .catch((err) => {
                 console.error("Failed to retrieve job", err);
                 res.status(500).json({ error: "Failed to retrieve job" });
+            });
+        };
+        this.payJob = (req, res) => {
+            let _id = req.body._id;
+            console.log(_id);
+            job_1.default.updateOne({ _id: _id }, { $set: { jobStatus: "finished" } }, { new: true }, (err, updatedJob) => {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log(updatedJob);
+                    res.json({ msg: "ok" });
+                }
             });
         };
     }

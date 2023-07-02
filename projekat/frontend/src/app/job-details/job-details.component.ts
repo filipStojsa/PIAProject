@@ -100,4 +100,23 @@ export class JobDetailsComponent implements OnInit  {
     ctx.stroke()
   }
 
+  showButton() {
+    let isAllFinished = true
+    this.jobsObject.rooms.forEach(room => {
+      if(room.color != 'green') {
+        isAllFinished = false
+      }
+    });
+    return this.myJob.jobStatus == 'inProgress' && isAllFinished
+  }
+
+  payJob() {
+    this.jobService.payJob(localStorage.getItem('jobId')).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Job payed succesfully!')
+        this.router.navigate(['user/my_jobs'])
+      }
+    })
+  }
+
 }

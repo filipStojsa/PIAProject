@@ -38,4 +38,15 @@ export class JobsComponent implements OnInit {
     this.router.navigate(['user/job/details']);
   }
 
+  getRowColor(jobStatus: string): string {
+    if (jobStatus === 'accepted') {
+      return '#C8E6C9';
+    } else if (jobStatus === 'denied') {
+      return '#FFCDD2';
+    } else {
+      return '';
+    }
+  }
+  
+
 }
