@@ -1,4 +1,4 @@
-<table>
+<table class="job-table">
     <thead>
       <tr>
         <th>Agency Username</th>
@@ -6,15 +6,19 @@
         <th>Object</th>
         <th>Start</th>
         <th>End</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let job of myJobs">
         <td>{{ job.agencyUsername }}</td>
         <td>{{ job.jobStatus }}</td>
-        <td>{{ job.object }}</td>
+        <td>{{ job.display }}</td>
         <td>{{ job.start | date }}</td>
         <td>{{ job.end | date }}</td>
+        <td>
+          <button (click)="showDetails(job._id)">Details</button>
+        </td>
       </tr>
     </tbody>
   </table>

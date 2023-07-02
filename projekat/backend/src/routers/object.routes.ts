@@ -27,4 +27,8 @@ objectRouter.route('/getObject/:id').get(
     (req, res) => new ObjectController().getObject(req, res)
 )
 
+objectRouter.route('/getJob/:id').get(
+    (req, res) => new ObjectController().getJob(req, res)
+)
+
 export default objectRouter;

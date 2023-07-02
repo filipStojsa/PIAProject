@@ -5,4 +5,5 @@ export class Job {
     object: string
     start: Date
     end: Date
+    display: string
 }

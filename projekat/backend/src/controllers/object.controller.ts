@@ -94,4 +94,16 @@ export class ObjectController {
         res.status(500).json({ error: "Failed to retrieve objects" });
       });
   }
+
+  getJob = (req: express.Request, res: express.Response) => {
+    let _id = req.params.id
+    JobModel.findOne({ _id })
+      .then((job) => {
+        res.json(job);
+      })
+      .catch((err) => {
+        console.error("Failed to retrieve job", err);
+        res.status(500).json({ error: "Failed to retrieve job" });
+      });
+  }
 }

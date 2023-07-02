@@ -10,6 +10,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserObjectComponent } from './user-object/user-object.component';
 import { CreateJobComponent } from './create-job/create-job.component';
 import { JobsComponent } from './jobs/jobs.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: "user/details", component: UserDetailsComponent},
   {path: "user/create_object", component: UserObjectComponent},
   {path: "user/create_job", component: CreateJobComponent},
-  {path: "user/my_jobs", component: JobsComponent}
+  {path: "user/my_jobs", component: JobsComponent},
+  {path: "user/job/details", component: JobDetailsComponent},
 ];
 
 @NgModule({

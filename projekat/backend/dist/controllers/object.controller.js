@@ -86,6 +86,17 @@ class ObjectController {
                 res.status(500).json({ error: "Failed to retrieve objects" });
             });
         };
+        this.getJob = (req, res) => {
+            let _id = req.params.id;
+            job_1.default.findOne({ _id })
+                .then((job) => {
+                res.json(job);
+            })
+                .catch((err) => {
+                console.error("Failed to retrieve job", err);
+                res.status(500).json({ error: "Failed to retrieve job" });
+            });
+        };
     }
 }
 exports.ObjectController = ObjectController;

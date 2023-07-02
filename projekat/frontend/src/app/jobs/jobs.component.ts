@@ -23,15 +23,19 @@ export class JobsComponent implements OnInit {
     this.jobService.getMyJobs(this.loggedUsername).subscribe((jobs: Job[]) => {
       jobs.forEach(job => {
         this.jobService.getObject(job.object).subscribe((obj: Object) => {
-          job.object = obj.type + ' at ' + obj.address
+          job.display = obj.type + ' at ' + obj.address
         })
       });
 
       this.myJobs = jobs
+      localStorage.removeItem('jobId')
     })
 
   }
 
-
+  showDetails(id) {
+    localStorage.setItem('jobId', id)
+    this.router.navigate(['user/job/details']);
+  }
 
 }

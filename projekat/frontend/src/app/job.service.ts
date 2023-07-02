@@ -27,4 +27,8 @@ export class JobService {
   getObject(id) {
     return this.http.get(`${this.uri}/object/getObject/${id}`)
   }
+
+  getJob(id) {
+    return this.http.get(`${this.uri}/object/getJob/${id}`)
+  }
 }
