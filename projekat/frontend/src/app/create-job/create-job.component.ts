@@ -88,4 +88,8 @@ export class CreateJobComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['user']);
+  }
+
 }

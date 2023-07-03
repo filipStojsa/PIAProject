@@ -47,6 +47,10 @@ export class JobsComponent implements OnInit {
       return '';
     }
   }
+
+  goBack() {
+    this.router.navigate(['user']);
+  }
   
 
 }

@@ -65,4 +65,8 @@ export class AgencyDetailsComponent implements OnInit {
       }
     })
   }
+
+  goBack() {
+    this.router.navigate(['general']);
+  }
 }

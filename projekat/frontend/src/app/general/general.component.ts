@@ -103,4 +103,13 @@ export class GeneralComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['user']);
+  }
+
+  showButton() {
+    if(localStorage.getItem('loggedUser')) return true
+    return false
+  }
+
 }

@@ -25,5 +25,9 @@
                 <button class="btn btn-primary" (click)="seeMore(agency.username)">See more</button>
             </div>
         </div>
+        <br>
+        <button class="btn btn-primary" (click)="goBack()" *ngIf="showButton()">
+            Go Back
+        </button>
     </div>
 </body>
