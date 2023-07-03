@@ -38,10 +38,30 @@
           </li>
           <li class="list-group-item" *ngIf="showButton()">
             <button class="btn btn-success" (click)="payJob()">
-              Plati
+              Pay
             </button>
           </li>
         </ul>
+        <div class="container mt-4" *ngIf="showComment()">
+          <h3>Leave a Comment</h3>
+          <div class="form-group">
+            <label for="score">Score:</label>
+            <select id="score" class="form-control" [(ngModel)]="selectedScore">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" class="form-control" [(ngModel)]="comment"></textarea>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success" (click)="submitComment()">Submit</button>
+          </div>
+        </div>
       </ul>
     </div>
   </div>

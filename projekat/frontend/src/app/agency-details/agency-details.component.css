@@ -1,7 +1,18 @@
 body {
-    padding: 20px;
+  padding: 20px;
 }
 
 .user-details {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.comment {
+  position: relative;
+}
+
+.edit-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
 }

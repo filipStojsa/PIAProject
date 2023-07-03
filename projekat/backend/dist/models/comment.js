@@ -14,6 +14,9 @@ let Comment = new Schema({
     },
     comment: {
         type: String
+    },
+    username: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('CommentModel', Comment, 'comment');

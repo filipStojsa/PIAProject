@@ -3,6 +3,7 @@ import { Job } from '../models/job';
 import { Object } from '../models/object';
 import { Router } from '@angular/router';
 import { JobService } from '../job.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-job-details',
@@ -18,6 +19,11 @@ export class JobDetailsComponent implements OnInit  {
   
   myJob: Job
   jobsObject: Object
+
+  // For comment
+  selectedScore: number
+  comment: string
+
 
   ngOnInit(): void {
     this.jobService.getJob(localStorage.getItem('jobId')).subscribe((job: Job) => {
@@ -110,6 +116,15 @@ export class JobDetailsComponent implements OnInit  {
     return this.myJob.jobStatus == 'inProgress' && isAllFinished
   }
 
+  showComment() {
+    if(this.myJob.jobStatus == 'finished') {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   payJob() {
     this.jobService.payJob(localStorage.getItem('jobId')).subscribe((resp) => {
       if(resp['msg'] == 'ok') {
@@ -118,5 +133,22 @@ export class JobDetailsComponent implements OnInit  {
       }
     })
   }
+
+  submitComment() {
+    // Process the selected score and comment
+    let user: User = JSON.parse(localStorage.getItem('loggedUser'))
+    this.jobService.addComment(
+      this.selectedScore,
+      this.comment, 
+      user.username,
+      user.name + ' ' + user.surname,
+      this.myJob.agencyUsername
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Comment succesfuly added!')
+      }
+    })
+  }
+
 
 }

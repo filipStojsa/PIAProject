@@ -11,6 +11,9 @@ let Comment = new Schema({
     },
     comment: {
         type: String
+    },
+    username: {
+        type: String
     }
 })
 

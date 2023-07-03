@@ -38,4 +38,15 @@ export class JobService {
     }
     return this.http.post(`${this.uri}/object/payJob`, data)
   }
+
+  addComment(rating: number, comment: string, username: string, user: string, agencyId: string) {
+    const data = {
+      rating: rating,
+      comment: comment,
+      username: username,
+      user: user,
+      agencyId: agencyId
+    }
+    return this.http.post(`${this.uri}/agency/addComment`, data)
+  }
 }

@@ -3,6 +3,7 @@ import { GeneralService } from '../general.service';
 import { Router } from '@angular/router';
 import { Agency } from '../models/agency';
 import {Comment} from "../models/comment"
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-agency-details',
@@ -30,4 +31,38 @@ export class AgencyDetailsComponent implements OnInit {
     }
   }
 
+  showButton(username) {
+    let user: User = JSON.parse(localStorage.getItem('loggedUser'))
+    if(user) {
+      let loggedUsername = user.username
+      if(username == loggedUsername) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  editComment(comIndex) {
+    let newCommentText = prompt('Enter new comment:')
+    let newRating = prompt('Enter new rating:')
+    let agencyUsername = this.agency.username
+
+    if(parseInt(newRating) > 5 || parseInt(newRating) < 1) {
+      alert('New rating must be between 1 and 5!')
+      return
+    }
+
+    this.service.editComment(
+      agencyUsername,
+      newCommentText,
+      newRating,
+      comIndex
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Comment edited!')
+        this.router.navigate(['general']);
+      }
+    })
+  }
 }

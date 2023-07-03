@@ -72,6 +72,66 @@ class AgencyController {
                 }
             });
         };
+        this.addComment = (req, res) => {
+            let agencyUsername = req.body.agencyId;
+            let commentText = req.body.comment;
+            let user = req.body.user;
+            let username = req.body.username;
+            let rating = req.body.rating;
+            agency_1.default.findOne({ 'username': agencyUsername }, (err, agency) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (agency) {
+                        let comment = {
+                            user: user,
+                            rating: rating,
+                            comment: commentText,
+                            username: username
+                        };
+                        agency_1.default.updateOne({ 'username': agencyUsername }, { $push: { 'comments': comment } }, (err, response) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
+        this.editComment = (req, res) => {
+            let agencyUsername = req.body.agencyUsername;
+            let commentText = req.body.comment;
+            let rating = req.body.rating;
+            let commentIndex = req.body.index;
+            console.log('Comm - ' + commentText);
+            console.log('Rating - ' + rating);
+            agency_1.default.findOne({ 'username': agencyUsername }, (err, agency) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (agency) {
+                        agency_1.default.updateOne({ 'username': agencyUsername }, { $set: {
+                                [`comments.${commentIndex}.rating`]: rating,
+                                [`comments.${commentIndex}.comment`]: commentText,
+                            } }, (err, response) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.AgencyController = AgencyController;

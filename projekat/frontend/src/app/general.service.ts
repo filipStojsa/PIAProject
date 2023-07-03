@@ -12,4 +12,15 @@ export class GeneralService {
   getAllAgencies() {
     return this.http.get(`${this.uri}/agency/getAllAgencies`)
   }
+
+  editComment(agencyUsername: string, comment: string, rating: string, index: number) {
+    const data = {
+      agencyUsername: agencyUsername,
+      comment: comment,
+      rating: rating,
+      index: index
+    }
+
+    return this.http.post(`${this.uri}/agency/editComment`, data)
+  }
 }
