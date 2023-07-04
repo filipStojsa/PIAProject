@@ -150,5 +150,35 @@ export class JobDetailsComponent implements OnInit  {
     })
   }
 
+  showAcceptDenyButtons() {
+    if(this.myJob.jobStatus == 'pending' && this.myJob.offer != 0) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  acceptJob() {
+    this.jobService.changeJobStatus(
+      'accepted',
+      localStorage.getItem('jobId')
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Job succesfuly accepted!')
+      }
+    })
+  }
+
+  denyJob() {
+    this.jobService.changeJobStatus(
+      'denied',
+      localStorage.getItem('jobId')
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Job denied!')
+      }
+    })
+  }
 
 }

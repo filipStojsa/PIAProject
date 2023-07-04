@@ -64,6 +64,18 @@ export class ObjectController {
       });
   };
 
+  getAgencyJobs = (req: express.Request, res: express.Response) => {
+    let agencyUsername = req.params.agencyUsername;
+    JobModel.find({ agencyUsername: agencyUsername })
+      .then((jobs) => {
+        res.json(jobs);
+      })
+      .catch((err) => {
+        console.error("Failed to retrieve jobs", err);
+        res.status(500).json({ error: "Failed to retrieve jobs" });
+      });
+  };
+
   addJob = (req: express.Request, res: express.Response) => {
     let objectsId = req.body.selectedObject;
     let agencyUsername = req.body.selectedAgency;
@@ -79,6 +91,7 @@ export class ObjectController {
         object: objectsId,
         start: startDate,
         end: endDate,
+        offer: 0
       },
     ]);
 
@@ -115,6 +128,46 @@ export class ObjectController {
     JobModel.updateOne(
       { _id : _id },
       { $set: { jobStatus: "finished" } },
+      { new: true },
+      (err, updatedJob) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedJob);
+          res.json({ msg: "ok" });
+        }
+      }
+    );
+  };
+
+  makeAnOffer = (req: express.Request, res: express.Response) => {
+    let _id = req.body._id;
+    let offer = req.body.offer
+
+    console.log(_id)
+    JobModel.updateOne(
+      { _id : _id },
+      { $set: { offer: offer } },
+      { new: true },
+      (err, updatedJob) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedJob);
+          res.json({ msg: "ok" });
+        }
+      }
+    );
+  };
+
+  changeJobStatus = (req: express.Request, res: express.Response) => {
+    let _id = req.body._id;
+    let status = req.body.status
+
+    console.log(_id)
+    JobModel.updateOne(
+      { _id : _id },
+      { $set: { jobStatus: status } },
       { new: true },
       (err, updatedJob) => {
         if (err) {

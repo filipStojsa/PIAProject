@@ -24,6 +24,10 @@ export class JobService {
     return this.http.get(`${this.uri}/object/getMyJobs/${username}`)
   }
 
+  getAgencyJobs(agencyUsername: string) {
+    return this.http.get(`${this.uri}/object/getAgencyJobs/${agencyUsername}`)
+  }
+
   getObject(id) {
     return this.http.get(`${this.uri}/object/getObject/${id}`)
   }
@@ -48,5 +52,21 @@ export class JobService {
       agencyId: agencyId
     }
     return this.http.post(`${this.uri}/agency/addComment`, data)
+  }
+
+  makeAnOffer(offer: number, _id: string) {
+    const data = {
+      offer: offer,
+      _id: _id
+    }
+    return this.http.post(`${this.uri}/object/makeAnOffer`, data)
+  }
+
+  changeJobStatus(status: string, _id: string) {
+    const data = {
+      _id: _id,
+      status: status
+    }
+    return this.http.post(`${this.uri}/object/changeJobStatus`, data)
   }
 }

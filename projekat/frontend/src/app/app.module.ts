@@ -16,6 +16,7 @@ import { UserObjectComponent } from './user-object/user-object.component';
 import { CreateJobComponent } from './create-job/create-job.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { JobDetailsComponent } from './job-details/job-details.component';
     UserObjectComponent,
     CreateJobComponent,
     JobsComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
+    AgencyJobsComponent
   ],
   imports: [
     BrowserModule,

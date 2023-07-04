@@ -20,6 +20,9 @@ let Job = new Schema({
     },
     end: {
         type: Date
+    },
+    offer: {
+        type: Number
     }
 })
 

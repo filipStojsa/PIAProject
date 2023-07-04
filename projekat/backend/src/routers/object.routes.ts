@@ -19,8 +19,16 @@ objectRouter.route('/getMyJobs/:username').get(
     (req, res) => new ObjectController().getMyJobs(req, res)
 )
 
+objectRouter.route('/getAgencyJobs/:agencyUsername').get(
+    (req, res) => new ObjectController().getAgencyJobs(req, res)
+)
+
 objectRouter.route('/addJob').post(
     (req, res) => new ObjectController().addJob(req, res)
+)
+
+objectRouter.route('/makeAnOffer').post(
+    (req, res) => new ObjectController().makeAnOffer(req, res)
 )
 
 objectRouter.route('/getObject/:id').get(
@@ -33,6 +41,10 @@ objectRouter.route('/getJob/:id').get(
 
 objectRouter.route('/payJob').post(
     (req, res) => new ObjectController().payJob(req, res)
+)
+
+objectRouter.route('/changeJobStatus').post(
+    (req, res) => new ObjectController().changeJobStatus(req, res)
 )
 
 export default objectRouter;

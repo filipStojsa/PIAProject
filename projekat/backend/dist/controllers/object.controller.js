@@ -59,6 +59,17 @@ class ObjectController {
                 res.status(500).json({ error: "Failed to retrieve jobs" });
             });
         };
+        this.getAgencyJobs = (req, res) => {
+            let agencyUsername = req.params.agencyUsername;
+            job_1.default.find({ agencyUsername: agencyUsername })
+                .then((jobs) => {
+                res.json(jobs);
+            })
+                .catch((err) => {
+                console.error("Failed to retrieve jobs", err);
+                res.status(500).json({ error: "Failed to retrieve jobs" });
+            });
+        };
         this.addJob = (req, res) => {
             let objectsId = req.body.selectedObject;
             let agencyUsername = req.body.selectedAgency;
@@ -73,6 +84,7 @@ class ObjectController {
                     object: objectsId,
                     start: startDate,
                     end: endDate,
+                    offer: 0
                 },
             ]);
             res.json({ msg: "ok" });
@@ -103,6 +115,34 @@ class ObjectController {
             let _id = req.body._id;
             console.log(_id);
             job_1.default.updateOne({ _id: _id }, { $set: { jobStatus: "finished" } }, { new: true }, (err, updatedJob) => {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log(updatedJob);
+                    res.json({ msg: "ok" });
+                }
+            });
+        };
+        this.makeAnOffer = (req, res) => {
+            let _id = req.body._id;
+            let offer = req.body.offer;
+            console.log(_id);
+            job_1.default.updateOne({ _id: _id }, { $set: { offer: offer } }, { new: true }, (err, updatedJob) => {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log(updatedJob);
+                    res.json({ msg: "ok" });
+                }
+            });
+        };
+        this.changeJobStatus = (req, res) => {
+            let _id = req.body._id;
+            let status = req.body.status;
+            console.log(_id);
+            job_1.default.updateOne({ _id: _id }, { $set: { jobStatus: status } }, { new: true }, (err, updatedJob) => {
                 if (err) {
                     console.error(err);
                 }

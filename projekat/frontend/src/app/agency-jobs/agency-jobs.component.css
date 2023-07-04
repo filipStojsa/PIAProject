@@ -25,6 +25,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  margin-left: 5px;
 }
 
 .job-table button:hover {

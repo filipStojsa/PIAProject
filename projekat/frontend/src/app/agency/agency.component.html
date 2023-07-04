@@ -1,1 +1,16 @@
-<p>agency works!</p>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  />
+</head>
+<div class="container">
+  <h1>Welcome Agency: {{ loggedAgency.agencyName }}</h1>
+  <hr />
+  <button class="btn btn-secondary" (click)="gotoDetails()">
+    See my details
+  </button>
+  <br />
+  <br />
+  <button class="btn btn-secondary" (click)="gotoMyJobs()">My jobs</button>
+</div>

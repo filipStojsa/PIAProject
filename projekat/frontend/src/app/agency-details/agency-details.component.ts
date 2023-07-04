@@ -20,7 +20,7 @@ export class AgencyDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.agency = JSON.parse(localStorage.getItem('agency'))
     this.comments = this.agency.comments
-    if(!JSON.parse(localStorage.getItem('loggedUser'))) {
+    if(!JSON.parse(localStorage.getItem('loggedUser')) && !JSON.parse(localStorage.getItem('loggedAgency'))) {
       // A user is not logged in
       this.comments.forEach(com => {
         const firstLetter = com.user.charAt(0);
@@ -67,6 +67,11 @@ export class AgencyDetailsComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['general']);
+    if(JSON.parse(localStorage.getItem('loggedAgency'))) {
+      this.router.navigate(['agency']);
+    }
+    else {
+      this.router.navigate(['general']);
+    }
   }
 }

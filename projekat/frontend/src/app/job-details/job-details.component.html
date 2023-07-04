@@ -22,6 +22,9 @@
         <li class="list-group-item">
           <strong>End:</strong> {{ myJob.end | date }}
         </li>
+        <li class="list-group-item">
+          <strong>Offer:</strong> {{ myJob.offer }}$
+        </li>
         <h4 class="mt-4">Object</h4>
         <ul class="list-group">
           <li class="list-group-item">
@@ -39,6 +42,14 @@
           <li class="list-group-item" *ngIf="showButton()">
             <button class="btn btn-success" (click)="payJob()">
               Pay
+            </button>
+          </li>
+          <li class="list-group-item" *ngIf="showAcceptDenyButtons()">
+            <button class="btn btn-success" (click)="acceptJob()">
+              Accept
+            </button>
+            <button class="btn btn-danger" (click)="denyJob()">
+              Deny
             </button>
           </li>
         </ul>

@@ -6,4 +6,5 @@ export class Job {
     start: Date
     end: Date
     display: string
+    offer: number
 }
