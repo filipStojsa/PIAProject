@@ -12,6 +12,7 @@ import { CreateJobComponent } from './create-job/create-job.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
+import { AgencyJobDetailsComponent } from './agency-job-details/agency-job-details.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: "user/create_job", component: CreateJobComponent},
   {path: "user/my_jobs", component: JobsComponent},
   {path: "user/job/details", component: JobDetailsComponent},
-  {path: "agency/job/details", component: JobDetailsComponent},
+  {path: "agency/job/details", component: AgencyJobDetailsComponent},
   {path: "agency/jobs", component: AgencyJobsComponent},
 ];
 

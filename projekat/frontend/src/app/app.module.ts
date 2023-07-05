@@ -17,6 +17,7 @@ import { CreateJobComponent } from './create-job/create-job.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
+import { AgencyJobDetailsComponent } from './agency-job-details/agency-job-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
     CreateJobComponent,
     JobsComponent,
     JobDetailsComponent,
-    AgencyJobsComponent
+    AgencyJobsComponent,
+    AgencyJobDetailsComponent
   ],
   imports: [
     BrowserModule,

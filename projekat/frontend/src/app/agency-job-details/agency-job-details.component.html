@@ -1,0 +1,45 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  />
+</head>
+<div *ngIf="myJob" class="container">
+  <h2 class="mt-4">Job Details</h2>
+  <div class="card">
+    <div class="card-body">
+      <ul class="list-group">
+        <h4 class="mt-4">Object</h4>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Job status:</strong> {{ myJob.jobStatus }}
+          </li>
+          <li class="list-group-item">
+            <strong>Object type:</strong> {{ jobsObject.type }}
+          </li>
+          <li class="list-group-item">
+            <strong>Address:</strong> {{ jobsObject.address }}
+          </li>
+          <li class="list-group-item">
+            <strong>Area:</strong> {{ jobsObject.area }}
+          </li>
+          <li class="list-group-item" *ngIf="myJob.jobStatus === 'inProgress'">
+            <h5 class="mt-2">Work on object:</h5>
+            <!-- Add logic for working on jobs -->
+          </li>
+          <li class="list-group-item">
+            <canvas #canvas width="600" height="300"></canvas>
+          </li>
+          <li class="list-group-item" *ngIf="showStartJobButton()">
+            <button class="btn btn-success" (click)="startJob()">
+              Start work!
+            </button>
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="!myJob" class="container">
+  <p class="mt-4">No job details found.</p>
+</div>

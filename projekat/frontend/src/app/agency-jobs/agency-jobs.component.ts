@@ -72,5 +72,4 @@ export class AgencyJobsComponent implements OnInit {
     localStorage.setItem('jobId', id)
     this.router.navigate(['agency/job/details']);
   }
-
 }

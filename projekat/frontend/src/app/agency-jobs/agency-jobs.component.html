@@ -36,7 +36,6 @@
       <th>Object</th>
       <th>Start</th>
       <th>End</th>
-      <th>Offer</th>
       <th>Details</th>
     </tr>
   </thead>
@@ -49,10 +48,6 @@
       <td>{{ job.display }}</td>
       <td>{{ job.start | date }}</td>
       <td>{{ job.end | date }}</td>
-      <td>
-        <input type="number" name="offer" [(ngModel)]="myOffer" id="offer-input" placeholder="In $">
-        <button (click)="makeAnOffer(job._id)">Send offer</button>
-      </td>
       <td><button (click)="showDetails(job._id)">Details</button></td>
     </tr>
   </tbody>
@@ -66,13 +61,12 @@
       <th>Object</th>
       <th>Start</th>
       <th>End</th>
-      <th>Offer</th>
       <th>Details</th>
     </tr>
   </thead>
   <tbody>
     <tr
-      *ngFor="let job of inProgressJobs"
+      *ngFor="let job of otherJobs"
       [ngStyle]="{ 'background-color': getRowColor(job.jobStatus) }"
     >
       <td>{{ job.username }}</td>
@@ -80,10 +74,8 @@
       <td>{{ job.start | date }}</td>
       <td>{{ job.end | date }}</td>
       <td>
-        <input type="number" name="offer" [(ngModel)]="myOffer" id="offer-input" placeholder="In $">
-        <button (click)="makeAnOffer(job._id)">Send offer</button>
+        <button (click)="showDetails(job._id)">Details</button>
       </td>
-      <td><button (click)="showDetails(job._id)">Details</button></td>
     </tr>
   </tbody>
 </table>
