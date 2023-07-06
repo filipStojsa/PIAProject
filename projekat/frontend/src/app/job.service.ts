@@ -69,4 +69,14 @@ export class JobService {
     }
     return this.http.post(`${this.uri}/object/changeJobStatus`, data)
   }
+
+  changeObjectsColor(objectID: string, index: number, color: string) {
+    const data = {
+      objectID: objectID, 
+      index: index,
+      color: color
+    }
+
+    return this.http.post(`${this.uri}/object/changeObjectsColor`, data)
+  }
 }

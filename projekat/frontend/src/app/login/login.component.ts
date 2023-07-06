@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { User } from '../models/user';
 import { Agency } from '../models/agency';
+import { Admin } from '../models/admin';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,15 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('loggedUser', JSON.stringify(user))
           this.router.navigate(['user']);
         }
-        else {
+        else if(resp['type'] == 'agency') {
           let agency: Agency = resp['agency']
           localStorage.setItem('loggedAgency', JSON.stringify(agency))
           this.router.navigate(['agency']);
+        }
+        else {
+          let admin: Admin = resp['admin']
+          localStorage.setItem('loggedAdmin', JSON.stringify(admin))
+          this.router.navigate(['admin']);
         }
       }
       else {

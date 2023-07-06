@@ -141,4 +141,45 @@ export class AgencyController{
             }
         })
     }
+
+    modifyAgencyField = (req: express.Request, res: express.Response) => {
+        let field = req.body.field
+        let value = req.body.value
+        let username = req.body.username
+
+        AgencyModel.findOne({'username': username}, (err, user)=>{
+            console.log(user)
+            if(err) console.log(err)
+            else {
+                if(user) {
+                    AgencyModel.updateOne(
+                        { 'username': username },
+                        { $set : { [ field ] : value } },
+                        (err, resp) => {
+                            if(err) console.log(err)
+                            else {
+                                res.json({'msg': 'ok'})
+                            }
+                        }
+                    )
+                }
+                else {
+                    res.json({'msg': 'notFound'})
+                }
+            }
+        })
+    }
+
+    deleteUser = (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+        AgencyModel.deleteOne({ 'username': username }, (err, result) => {
+            if (err) console.error(err);
+        
+            if (result.deletedCount === 0) {
+              return res.status(404).json({ 'msg': 'notFound' });
+            }
+        
+            res.json({ 'msg': 'ok' });
+        })
+    }
 }

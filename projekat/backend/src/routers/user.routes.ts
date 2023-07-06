@@ -19,6 +19,10 @@ userRouter.route('/register').post(
     (req, res)=>new UserController().register(req, res)
 )
 
+userRouter.route('/modifyUserField').post(
+    (req, res)=>new UserController().modifyUserField(req, res)
+)
+
 userRouter.route('/get').get(
     (req, res)=>new UserController().get(req, res)
 )

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const agency_1 = __importDefault(require("../models/agency"));
+const admin_1 = __importDefault(require("../models/admin"));
 class UserController {
     constructor() {
         // Login for both User and Agency
@@ -34,8 +35,22 @@ class UserController {
                                     });
                                 }
                                 else {
-                                    res.json({
-                                        "type": "error"
+                                    admin_1.default.findOne({ 'username': username, 'password': password }, (err2, admin) => {
+                                        if (err2)
+                                            console.log(err2);
+                                        else {
+                                            if (admin) {
+                                                res.json({
+                                                    "admin": admin,
+                                                    "type": "admin"
+                                                });
+                                            }
+                                            else {
+                                                res.json({
+                                                    "type": "error"
+                                                });
+                                            }
+                                        }
                                     });
                                 }
                             }

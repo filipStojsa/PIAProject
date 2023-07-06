@@ -152,6 +152,21 @@ class ObjectController {
                 }
             });
         };
+        this.changeObjectsColor = (req, res) => {
+            let _id = req.body.objectID;
+            let index = req.body.index;
+            let color = req.body.color;
+            console.log(_id);
+            object_1.default.updateOne({ _id: _id }, { $set: { [`rooms.${index}.color`]: color } }, { new: true }, (err, updatedObject) => {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log(updatedObject);
+                    res.json({ msg: "ok" });
+                }
+            });
+        };
     }
 }
 exports.ObjectController = ObjectController;

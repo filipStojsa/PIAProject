@@ -1,6 +1,7 @@
 import express from 'express'
 import UserModel from '../models/user'
 import AgencyModel from '../models/agency'
+import AdminModel from '../models/admin'
 
 
 export class UserController{
@@ -9,7 +10,6 @@ export class UserController{
     login = (req: express.Request, res: express.Response) => {
         let username = req.body.username;
         let password = req.body.password;
-
         UserModel.findOne({'username': username, 'password': password}, (err, user)=>{
             if(err) console.log(err);
             else {
@@ -30,8 +30,21 @@ export class UserController{
                                 })
                             }
                             else {
-                                res.json({
-                                    "type": "error"
+                                AdminModel.findOne({'username': username, 'password': password}, (err2, admin)=>{
+                                    if(err2) console.log(err2);
+                                    else {
+                                        if(admin) {
+                                            res.json({
+                                                "admin": admin,
+                                                "type": "admin"
+                                            })
+                                        }
+                                        else {
+                                            res.json({
+                                                "type": "error"
+                                            })
+                                        }
+                                    }
                                 })
                             }
                         }
@@ -99,6 +112,47 @@ export class UserController{
         // throw new Error('Method not implemented.')
         console.log('get')
         res.json({'msg': 'ok'})
+    }
+
+    modifyUserField = (req: express.Request, res: express.Response) => {
+        let field = req.body.field
+        let value = req.body.value
+        let username = req.body.username
+
+        UserModel.findOne({'username': username}, (err, user)=>{
+            console.log(user)
+            if(err) console.log(err)
+            else {
+                if(user) {
+                    UserModel.updateOne(
+                        { 'username': username },
+                        { $set : { [ field ] : value } },
+                        (err, resp) => {
+                            if(err) console.log(err)
+                            else {
+                                res.json({'msg': 'ok'})
+                            }
+                        }
+                    )
+                }
+                else {
+                    res.json({'msg': 'notFound'})
+                }
+            }
+        })
+    }
+
+    deleteUser = (req: express.Request, res: express.Response) => {
+        let username = req.body.username
+        UserModel.deleteOne({ 'username': username }, (err, result) => {
+            if (err) console.error(err);
+        
+            if (result.deletedCount === 0) {
+              return res.status(404).json({ 'msg': 'notFound' });
+            }
+        
+            res.json({ 'msg': 'ok' });
+        })
     }
 
 }

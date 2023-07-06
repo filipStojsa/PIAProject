@@ -31,6 +31,10 @@ objectRouter.route('/makeAnOffer').post(
     (req, res) => new ObjectController().makeAnOffer(req, res)
 )
 
+objectRouter.route('/changeObjectsColor').post(
+    (req, res) => new ObjectController().changeObjectsColor(req, res)
+)
+
 objectRouter.route('/getObject/:id').get(
     (req, res) => new ObjectController().getObject(req, res)
 )

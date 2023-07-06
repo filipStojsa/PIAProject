@@ -26,6 +26,18 @@
           <li class="list-group-item" *ngIf="myJob.jobStatus === 'inProgress'">
             <h5 class="mt-2">Work on object:</h5>
             <!-- Add logic for working on jobs -->
+            <div *ngFor="let room of jobsObject.rooms; let i = index">
+              Room {{i + 1}}: 
+              <select id="score" class="form-control" [(ngModel)]="roomProgress[i]">
+                <option value="white">Waiting for work</option>
+                <option value="red">Start work</option>
+                <option value="green">Finish work</option>
+              </select>
+            </div>
+            <br>
+            <button class="btn btn-success" (click)="doWork()">
+              Do selected work on objects
+            </button>
           </li>
           <li class="list-group-item">
             <canvas #canvas width="600" height="300"></canvas>

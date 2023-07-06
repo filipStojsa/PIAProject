@@ -19,6 +19,8 @@ export class AgencyJobDetailsComponent implements OnInit {
   myJob: Job
   jobsObject: Object
 
+  roomProgress = []
+
   ngOnInit(): void {
     this.jobService.getJob(localStorage.getItem('jobId')).subscribe((job: Job) => {
       this.myJob = job
@@ -116,6 +118,24 @@ export class AgencyJobDetailsComponent implements OnInit {
       return true
     }
     return false
+  }
+
+  doWork() {
+    for (let index = 0; index < this.roomProgress.length; index++) {
+      if(this.roomProgress[index] != undefined) {
+        this.jobService.changeObjectsColor(
+          this.myJob.object,
+          index,
+          this.roomProgress[index]
+        ).subscribe((resp) => {
+          if(resp['msg'] == 'ok') {
+            // Reload page
+            alert('Job done!')
+            this.router.navigate(['agency/jobs']);
+          }
+        })
+      }
+    }
   }
 
 }

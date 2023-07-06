@@ -179,4 +179,25 @@ export class ObjectController {
       }
     );
   };
+
+  changeObjectsColor = (req: express.Request, res: express.Response) => {
+    let _id = req.body.objectID;
+    let index = req.body.index;
+    let color = req.body.color;
+
+    console.log(_id)
+    ObjekatModel.updateOne(
+      { _id : _id },
+      { $set: { [`rooms.${index}.color`]: color } },
+      { new: true },
+      (err, updatedObject) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedObject);
+          res.json({ msg: "ok" });
+        }
+      }
+    );
+  };
 }
