@@ -7,8 +7,8 @@ objectRouter.route('/addObject').post(
     (req, res) => new ObjectController().addObject(req, res)
 )
 
-objectRouter.route('/get').get(
-    (req, res) => new ObjectController().get(req, res)
+objectRouter.route('/getAllJobs').get(
+    (req, res) => new ObjectController().getAllJobs(req, res)
 )
 
 objectRouter.route('/getMyObjects/:username').get(

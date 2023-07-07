@@ -39,7 +39,12 @@ let Agency = new Schema({
     comments: {
         type: Array
     },
-
+    status: {
+        type: String
+    },
+    workers: {
+        type: String
+    },
 })
 
 export default mongoose.model('AgencyModel', Agency, 'agency')

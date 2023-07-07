@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Admin } from '../models/admin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -8,7 +9,7 @@ import { Admin } from '../models/admin';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   loggedAdmin: Admin
 
@@ -17,15 +18,19 @@ export class AdminComponent implements OnInit {
   }
 
   gotoWorkWithUsers() {
-
+    this.router.navigate(['admin/users']);
   }
 
   gotoWorkWithAgencies() {
-    
+    this.router.navigate(['admin/agencies']);
   }
 
   gotoWorkWithJobs() {
-    
+    this.router.navigate(['admin/jobs']);
+  }
+
+  gotoRegistration() {
+    this.router.navigate(['register']);
   }
 
 }

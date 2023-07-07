@@ -1,0 +1,35 @@
+<head>
+  <title>Admin users</title>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+</head>
+<div class="containter">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-9 col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>User's username</th>
+            <th>Agency's username</th>
+            <th>Status</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Offer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of allJobs">
+            <td>{{ job.username }}</td>
+            <td>{{ job.agencyUsername }}</td>
+            <td>{{ job.jobStatus }}</td>
+            <td>{{ job.start | date }}</td>
+            <td>{{ job.end | date }}</td>
+            <td>{{ job.offer }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

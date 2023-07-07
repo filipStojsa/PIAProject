@@ -7,4 +7,5 @@ export class User {
     tel: string
     email: string
     image: string
+    status: string
 }

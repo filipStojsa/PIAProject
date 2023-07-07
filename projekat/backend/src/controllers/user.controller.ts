@@ -14,20 +14,35 @@ export class UserController{
             if(err) console.log(err);
             else {
                 if(user) {
-                    res.json({
-                        "user": user,
-                        "type": "user"
-                    })
+                    if(user.status == 'ok') {
+                        res.json({
+                            "user": user,
+                            "type": "user"
+                        })
+                    }
+                    else {
+                        res.json({
+                            "type": "notGranted"
+                        })
+                    }
                 }
                 else {
                     AgencyModel.findOne({'username': username, 'password': password}, (err1, agency)=>{
                         if(err1) console.log(err1);
                         else {
                             if(agency) {
-                                res.json({
-                                    "agency": agency,
-                                    "type": "agency"
-                                })
+                                if(agency.status == 'ok') {
+                                    res.json({
+                                        "agency": agency,
+                                        "type": "agency"
+                                    })
+                                }
+                                else {
+                                    res.json({
+                                        "type": "notGranted"
+                                    })
+                                }
+                                
                             }
                             else {
                                 AdminModel.findOne({'username': username, 'password': password}, (err2, admin)=>{
@@ -70,7 +85,8 @@ export class UserController{
             email: email,
             image: image,
             username: username,
-            password: password
+            password: password,
+            status: 'pending'
         }])
 
         res.json({'msg': 'OK'})
@@ -109,9 +125,13 @@ export class UserController{
     }
 
     get = (req: express.Request, res: express.Response) => {
-        // throw new Error('Method not implemented.')
-        console.log('get')
-        res.json({'msg': 'ok'})
+        console.log('get all users...')
+        UserModel.find({ }, (err, users) => {
+            if(err) console.log(err)
+            else {
+                res.json(users)
+            }
+        })
     }
 
     modifyUserField = (req: express.Request, res: express.Response) => {

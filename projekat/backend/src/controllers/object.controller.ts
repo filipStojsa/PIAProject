@@ -6,10 +6,15 @@ import { Request, Response } from 'express-serve-static-core'
 import { ParsedQs } from 'qs'
 
 export class ObjectController {
-  get = (req: express.Request, res: express.Response) => {
-    // throw new Error('Method not implemented.')
-    console.log("get");
-    res.json({ msg: "ok" });
+  getAllJobs = (req: express.Request, res: express.Response) => {
+    JobModel.find({}, (err, jobs) => {
+      if (err) console.log(err);
+      else {
+        if (jobs) {
+          res.json(jobs);
+        }
+      }
+    });
   };
 
   addObject = (req: express.Request, res: express.Response) => {
@@ -91,7 +96,7 @@ export class ObjectController {
         object: objectsId,
         start: startDate,
         end: endDate,
-        offer: 0
+        offer: 0,
       },
     ]);
 
@@ -124,9 +129,9 @@ export class ObjectController {
 
   payJob = (req: express.Request, res: express.Response) => {
     let _id = req.body._id;
-    console.log(_id)
+    console.log(_id);
     JobModel.updateOne(
-      { _id : _id },
+      { _id: _id },
       { $set: { jobStatus: "finished" } },
       { new: true },
       (err, updatedJob) => {
@@ -142,11 +147,11 @@ export class ObjectController {
 
   makeAnOffer = (req: express.Request, res: express.Response) => {
     let _id = req.body._id;
-    let offer = req.body.offer
+    let offer = req.body.offer;
 
-    console.log(_id)
+    console.log(_id);
     JobModel.updateOne(
-      { _id : _id },
+      { _id: _id },
       { $set: { offer: offer } },
       { new: true },
       (err, updatedJob) => {
@@ -162,11 +167,11 @@ export class ObjectController {
 
   changeJobStatus = (req: express.Request, res: express.Response) => {
     let _id = req.body._id;
-    let status = req.body.status
+    let status = req.body.status;
 
-    console.log(_id)
+    console.log(_id);
     JobModel.updateOne(
-      { _id : _id },
+      { _id: _id },
       { $set: { jobStatus: status } },
       { new: true },
       (err, updatedJob) => {
@@ -185,9 +190,9 @@ export class ObjectController {
     let index = req.body.index;
     let color = req.body.color;
 
-    console.log(_id)
+    console.log(_id);
     ObjekatModel.updateOne(
-      { _id : _id },
+      { _id: _id },
       { $set: { [`rooms.${index}.color`]: color } },
       { new: true },
       (err, updatedObject) => {

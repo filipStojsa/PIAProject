@@ -16,7 +16,7 @@ export class AgencyController{
         let description = req.body.description
         let username = req.body.username
         let password = req.body.password
-        let tel = req.body.password
+        let tel = req.body.tel
         let email = req.body.email
         let image = req.body.image
 
@@ -32,6 +32,8 @@ export class AgencyController{
             tel: tel,
             email: email,
             image: image,
+            status: 'pending',
+            workers: '0',
             comments: []
         }])
 
@@ -170,7 +172,7 @@ export class AgencyController{
         })
     }
 
-    deleteUser = (req: express.Request, res: express.Response) => {
+    deleteAgency = (req: express.Request, res: express.Response) => {
         let username = req.body.username
         AgencyModel.deleteOne({ 'username': username }, (err, result) => {
             if (err) console.error(err);

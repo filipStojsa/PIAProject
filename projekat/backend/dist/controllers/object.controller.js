@@ -8,10 +8,16 @@ const object_1 = __importDefault(require("../models/object"));
 const job_1 = __importDefault(require("../models/job"));
 class ObjectController {
     constructor() {
-        this.get = (req, res) => {
-            // throw new Error('Method not implemented.')
-            console.log("get");
-            res.json({ msg: "ok" });
+        this.getAllJobs = (req, res) => {
+            job_1.default.find({}, (err, jobs) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (jobs) {
+                        res.json(jobs);
+                    }
+                }
+            });
         };
         this.addObject = (req, res) => {
             // throw new Error('Method not implemented.')
@@ -84,7 +90,7 @@ class ObjectController {
                     object: objectsId,
                     start: startDate,
                     end: endDate,
-                    offer: 0
+                    offer: 0,
                 },
             ]);
             res.json({ msg: "ok" });

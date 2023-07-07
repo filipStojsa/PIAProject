@@ -19,6 +19,9 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
 import { AgencyJobDetailsComponent } from './agency-job-details/agency-job-details.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminAgenciesComponent } from './admin-agencies/admin-agencies.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { AdminComponent } from './admin/admin.component';
     JobDetailsComponent,
     AgencyJobsComponent,
     AgencyJobDetailsComponent,
-    AdminComponent
+    AdminComponent,
+    AdminAgenciesComponent,
+    AdminUsersComponent,
+    AdminJobsComponent
   ],
   imports: [
     BrowserModule,

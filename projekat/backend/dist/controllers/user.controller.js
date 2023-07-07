@@ -18,10 +18,17 @@ class UserController {
                     console.log(err);
                 else {
                     if (user) {
-                        res.json({
-                            "user": user,
-                            "type": "user"
-                        });
+                        if (user.status == 'ok') {
+                            res.json({
+                                "user": user,
+                                "type": "user"
+                            });
+                        }
+                        else {
+                            res.json({
+                                "type": "notGranted"
+                            });
+                        }
                     }
                     else {
                         agency_1.default.findOne({ 'username': username, 'password': password }, (err1, agency) => {
@@ -29,10 +36,17 @@ class UserController {
                                 console.log(err1);
                             else {
                                 if (agency) {
-                                    res.json({
-                                        "agency": agency,
-                                        "type": "agency"
-                                    });
+                                    if (agency.status == 'ok') {
+                                        res.json({
+                                            "agency": agency,
+                                            "type": "agency"
+                                        });
+                                    }
+                                    else {
+                                        res.json({
+                                            "type": "notGranted"
+                                        });
+                                    }
                                 }
                                 else {
                                     admin_1.default.findOne({ 'username': username, 'password': password }, (err2, admin) => {
@@ -74,7 +88,8 @@ class UserController {
                     email: email,
                     image: image,
                     username: username,
-                    password: password
+                    password: password,
+                    status: 'pending'
                 }]);
             res.json({ 'msg': 'OK' });
         };
@@ -111,9 +126,49 @@ class UserController {
             });
         };
         this.get = (req, res) => {
-            // throw new Error('Method not implemented.')
-            console.log('get');
-            res.json({ 'msg': 'ok' });
+            console.log('get all users...');
+            user_1.default.find({}, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    res.json(users);
+                }
+            });
+        };
+        this.modifyUserField = (req, res) => {
+            let field = req.body.field;
+            let value = req.body.value;
+            let username = req.body.username;
+            user_1.default.findOne({ 'username': username }, (err, user) => {
+                console.log(user);
+                if (err)
+                    console.log(err);
+                else {
+                    if (user) {
+                        user_1.default.updateOne({ 'username': username }, { $set: { [field]: value } }, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
+        this.deleteUser = (req, res) => {
+            let username = req.body.username;
+            user_1.default.deleteOne({ 'username': username }, (err, result) => {
+                if (err)
+                    console.error(err);
+                if (result.deletedCount === 0) {
+                    return res.status(404).json({ 'msg': 'notFound' });
+                }
+                res.json({ 'msg': 'ok' });
+            });
         };
     }
 }

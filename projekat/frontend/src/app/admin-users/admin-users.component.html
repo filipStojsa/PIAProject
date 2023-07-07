@@ -1,0 +1,149 @@
+<head>
+  <title>Admin users</title>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+</head>
+<div class="containter">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-9 col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Modify</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUsers">
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.status }}</td>
+            <td>
+              <button
+                class="btn btn-success"
+                (click)="modifyUser(user.username)"
+              >
+                Modify
+              </button>
+            </td>
+            <td>
+              <div *ngIf="user.status == 'pending'">
+                <button
+                  class="btn btn-success"
+                  (click)="acceptUser(user.username)"
+                >
+                  Accept
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="denyUser(user.username)"
+                >
+                  Deny
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="selectedUser">
+
+        <h3>Modify user {{ selectedUser.name }} {{ selectedUser.surname }}</h3>
+        <div>
+          <h5>Name:</h5>
+          <p id="name">
+            {{ selectedUser.name }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('name')"
+          >
+            Modify
+          </button>
+        </div>
+
+        <hr />
+
+        <div>
+          <h5>Surname:</h5>
+          <p id="surname">{{ selectedUser.surname }}</p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('surname')"
+          >
+            Modify
+          </button>
+        </div>
+
+        <hr />
+
+        <div>
+          <h5>Username:</h5>
+          <p id="username">{{ selectedUser.username }}</p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('username')"
+          >
+            Modify
+          </button>
+        </div>
+
+        <hr />
+
+        <div>
+          <h5>Telephone:</h5>
+          <p id="tel">{{ selectedUser.tel }}</p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('tel')"
+          >
+            Modify
+          </button>
+        </div>
+
+        <hr />
+
+        <div>
+          <h5>Email:</h5>
+          <p id="email">{{ selectedUser.email }}</p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('email')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+        <img src="{{ selectedUser.image }}" alt="No image" />
+        <br /><br />
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Change image</span>
+          </div>
+          <div class="custom-file">
+            <input
+              type="file"
+              id="image"
+              name="image"
+              (change)="onImageChange($event)"
+              class="form-control-file"
+              accept="image/*"
+              required
+            />
+            <label class="custom-file-label" for="image">Choose file</label>
+          </div>
+        </div>
+        <hr />
+        <button class="btn btn-danger" (click)="deleteUser()">
+            Delete this user
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

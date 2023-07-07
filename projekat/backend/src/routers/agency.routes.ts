@@ -27,6 +27,14 @@ agencyRouter.route('/editComment').post(
     (req, res)=>new AgencyController().editComment(req, res)
 )
 
+agencyRouter.route('/modifyAgencyField').post(
+    (req, res)=>new AgencyController().modifyAgencyField(req, res)
+)
+
+agencyRouter.route('/deleteAgency').post(
+    (req, res)=>new AgencyController().deleteAgency(req, res)
+)
+
 agencyRouter.route('/getAllAgencies').get(
     (req, res)=>new AgencyController().getAllAgencies(req, res)
 )

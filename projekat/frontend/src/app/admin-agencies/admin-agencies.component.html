@@ -1,0 +1,222 @@
+<head>
+  <title>Admin users</title>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+</head>
+<div class="containter">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-9 col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Agency name</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Modify</th>
+            <th>Action</th>
+            <th>Workers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agency of allAgencies">
+            <td>{{ agency.agencyName }}</td>
+            <td>{{ agency.username }}</td>
+            <td>{{ agency.status }}</td>
+            <td>{{ agency.adress }}</td>
+            <td>
+              <button
+                class="btn btn-success"
+                (click)="modifyAgency(agency.username)"
+              >
+                Modify
+              </button>
+            </td>
+            <td>
+              <div *ngIf="agency.status == 'pending'">
+                <button
+                  class="btn btn-success"
+                  (click)="acceptAgency(agency.username)"
+                >
+                  Accept
+                </button>
+                <button
+                  class="btn btn-danger"
+                  (click)="denyAgency(agency.username)"
+                >
+                  Deny
+                </button>
+              </div>
+            </td>
+            <td>
+              Now: {{ agency.workers }}
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="setWorkers(agency.username)"
+              >
+                Add Workers
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="selectedAgency">
+        <h3>Modify agency {{ selectedAgency.agencyName }}</h3>
+
+        <div>
+          <h5>Agency Name:</h5>
+          <p id="name">
+            {{ selectedAgency.agencyName }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('agencyName')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>State:</h5>
+          <p id="state">
+            {{ selectedAgency.state }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('state')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>City:</h5>
+          <p id="city">
+            {{ selectedAgency.city }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('city')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>Address:</h5>
+          <p id="adress">
+            {{ selectedAgency.adress }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('adress')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>PIB:</h5>
+          <p id="pib">
+            {{ selectedAgency.pib }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('pib')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>Description:</h5>
+          <p>
+            {{ selectedAgency.description }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('description')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>Username:</h5>
+          <p>
+            {{ selectedAgency.username }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('username')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>Telephone:</h5>
+          <p>
+            {{ selectedAgency.tel }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('tel')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <div>
+          <h5>Email:</h5>
+          <p>
+            {{ selectedAgency.email }}
+          </p>
+          <button
+            class="btn btn-warning btn-right"
+            (click)="modifyField('email')"
+          >
+            Modify
+          </button>
+        </div>
+        <hr />
+
+        <img src="{{ selectedAgency.image }}" alt="No image" />
+        <br /><br />
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Change image</span>
+          </div>
+          <div class="custom-file">
+            <input
+              type="file"
+              id="image"
+              name="image"
+              (change)="onImageChange($event)"
+              class="form-control-file"
+              accept="image/*"
+              required
+            />
+            <label class="custom-file-label" for="image">Choose file</label>
+          </div>
+        </div>
+        <hr />
+        <button class="btn btn-danger" (click)="deleteAgency()">
+          Delete this agency
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

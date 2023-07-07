@@ -20,7 +20,7 @@ class AgencyController {
             let description = req.body.description;
             let username = req.body.username;
             let password = req.body.password;
-            let tel = req.body.password;
+            let tel = req.body.tel;
             let email = req.body.email;
             let image = req.body.image;
             agency_1.default.insertMany([{
@@ -35,6 +35,8 @@ class AgencyController {
                     tel: tel,
                     email: email,
                     image: image,
+                    status: 'pending',
+                    workers: '0',
                     comments: []
                 }]);
             res.json({ 'msg': 'OK' });
@@ -130,6 +132,41 @@ class AgencyController {
                         res.json({ 'msg': 'notFound' });
                     }
                 }
+            });
+        };
+        this.modifyAgencyField = (req, res) => {
+            let field = req.body.field;
+            let value = req.body.value;
+            let username = req.body.username;
+            agency_1.default.findOne({ 'username': username }, (err, user) => {
+                console.log(user);
+                if (err)
+                    console.log(err);
+                else {
+                    if (user) {
+                        agency_1.default.updateOne({ 'username': username }, { $set: { [field]: value } }, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
+        this.deleteAgency = (req, res) => {
+            let username = req.body.username;
+            agency_1.default.deleteOne({ 'username': username }, (err, result) => {
+                if (err)
+                    console.error(err);
+                if (result.deletedCount === 0) {
+                    return res.status(404).json({ 'msg': 'notFound' });
+                }
+                res.json({ 'msg': 'ok' });
             });
         };
     }

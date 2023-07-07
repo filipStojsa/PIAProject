@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.service.login(this.username, this.password).subscribe((resp) => {
-      if(resp['type'] != 'error') {
+      if(resp['type'] != 'error' && resp['type'] != 'notGranted') {
         if(resp['type'] == 'user') {
           let user: User = resp['user']
           localStorage.setItem('loggedUser', JSON.stringify(user))
@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
         }
       }
       else {
-        this.message = 'Wrong credentials!'
+        if(resp['type'] == 'error')
+          this.message = 'Wrong credentials!'
+        else
+          this.message = 'Accound not granted by admin!'
       }
 
     })

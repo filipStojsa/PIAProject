@@ -61,4 +61,22 @@ export class RegistrationService {
 
     return this.http.post(`${this.uri}/user/checkIsEmailUnique`, data)
   }
+
+  changeUserField(field: string, value: string, username: string) {
+    const data = {
+      field: field,
+      value: value,
+      username: username
+    }
+    return this.http.post(`${this.uri}/user/modifyUserField`, data)
+  }
+
+  changeAgencyField(field: string, value: string, username: string) {
+    const data = {
+      field: field,
+      value: value,
+      username: username
+    }
+    return this.http.post(`${this.uri}/agency/modifyAgencyField`, data)
+  }
 }

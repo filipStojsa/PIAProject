@@ -24,6 +24,9 @@ let User = new Schema({
     image: {
         type: String
     },
+    status: {
+        type: String
+    }
 })
 
 export default mongoose.model('UserModel', User, 'users')

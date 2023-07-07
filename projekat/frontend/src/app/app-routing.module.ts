@@ -14,6 +14,9 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { AgencyJobsComponent } from './agency-jobs/agency-jobs.component';
 import { AgencyJobDetailsComponent } from './agency-job-details/agency-job-details.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminAgenciesComponent } from './admin-agencies/admin-agencies.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -29,7 +32,10 @@ const routes: Routes = [
   {path: "user/job/details", component: JobDetailsComponent},
   {path: "agency/job/details", component: AgencyJobDetailsComponent},
   {path: "agency/jobs", component: AgencyJobsComponent},
-  {path: "admin", component: AdminComponent}
+  {path: "admin", component: AdminComponent},
+  {path: "admin/agencies", component: AdminAgenciesComponent},
+  {path: "admin/users", component: AdminUsersComponent},
+  {path: "admin/jobs", component: AdminJobsComponent}
 ];
 
 @NgModule({

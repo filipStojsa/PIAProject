@@ -194,7 +194,18 @@ export class RegisterComponent implements OnInit {
         this.user.image = this.image
         this.service.registerUser(this.user).subscribe((resp) => {
           if(resp['msg'] == 'OK') {
-            alert('User is added succesfuly!')
+            if(localStorage.getItem('loggedAdmin')) {
+              this.service.changeUserField(
+                'status',
+                'ok',
+                this.user.username
+              ).subscribe((resp) => {
+                alert('User is added succesfuly by admin!')
+              })
+            }
+            else {
+              alert('User is added succesfuly!')
+            }
           }
         })
       }
@@ -204,7 +215,18 @@ export class RegisterComponent implements OnInit {
         this.agency.image = this.image
         this.service.registerAgency(this.agency).subscribe((resp) => {
           if(resp['msg'] == 'OK') {
-            alert('Agency is added succesfuly!')
+            if(localStorage.getItem('loggedAdmin')) {
+              this.service.changeAgencyField(
+                'status',
+                'ok',
+                this.agency.username
+              ).subscribe((resp) => {
+                alert('Agency is added succesfuly by admin!')
+              })
+            }
+            else {
+              alert('Agency is added succesfuly!')
+            }
           }
         })
       }

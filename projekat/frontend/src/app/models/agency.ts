@@ -13,6 +13,8 @@ export class Agency {
     tel: string
     email: string
     image: string
+    status: string
+    workers: string
 
     comments: Array<Comment>
 }
