@@ -1,31 +1,35 @@
-<table class="job-table">
-  <thead>
-    <tr>
-      <th>Agency Username</th>
-      <th>Job Status</th>
-      <th>Object</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let job of myJobs"
-      [ngStyle]="{ 'background-color': getRowColor(job.jobStatus) }"
-    >
-      <td>{{ job.agencyUsername }}</td>
-      <td>{{ job.jobStatus }}</td>
-      <td>{{ job.display }}</td>
-      <td>{{ job.start | date }}</td>
-      <td>{{ job.end | date }}</td>
-      <td>
-        <button (click)="showDetails(job._id)">Details</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<br>
-<button class="btn btn-success" (click)="goBack()">
-  Go Back
-</button>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="job-table">
+        <thead>
+          <tr>
+            <th>Agency Username</th>
+            <th>Job Status</th>
+            <th>Object</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let job of myJobs"
+            [ngStyle]="{ 'background-color': getRowColor(job.jobStatus) }"
+          >
+            <td>{{ job.agencyUsername }}</td>
+            <td>{{ job.jobStatus }}</td>
+            <td>{{ job.display }}</td>
+            <td>{{ job.start | date }}</td>
+            <td>{{ job.end | date }}</td>
+            <td>
+              <button (click)="showDetails(job._id)">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <button class="btn btn-success" (click)="goBack()">Go Back</button>
+    </div>
+  </div>
+</div>

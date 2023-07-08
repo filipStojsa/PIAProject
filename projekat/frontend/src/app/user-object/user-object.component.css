@@ -1,16 +1,17 @@
 .form-group {
   margin-bottom: 20px;
 }
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+
 
 .red-text {
     color: red;
+    font-size: larger;
 }
 
 canvas {
     border:1px solid #000000;
+}
+
+.row {
+  margin-bottom: 60px;
 }

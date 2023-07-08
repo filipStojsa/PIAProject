@@ -1,46 +1,39 @@
-<head>
-  <title>Agency Details</title>
-  <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  />
-</head>
 <body>
   <div *ngIf="loggedUser">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6 offset-md-3 user-details-row">
           <h2>User Details</h2>
 
-          <div class="agency-details">
+          <div>
             <h5>Name:</h5>
             <p id="name">{{ loggedUser.name }}</p>
           </div>
 
           <hr />
 
-          <div class="agency-details">
+          <div>
             <h5>Surname:</h5>
             <p id="surname">{{ loggedUser.surname }}</p>
           </div>
 
           <hr />
 
-          <div class="agency-details">
+          <div>
             <h5>Username:</h5>
             <p id="username">{{ loggedUser.username }}</p>
           </div>
 
           <hr />
 
-          <div class="agency-details">
+          <div>
             <h5>Telephone:</h5>
             <p id="tel">{{ loggedUser.tel }}</p>
           </div>
 
           <hr />
 
-          <div class="agency-details">
+          <div>
             <h5>Email:</h5>
             <p id="email">{{ loggedUser.email }}</p>
           </div>

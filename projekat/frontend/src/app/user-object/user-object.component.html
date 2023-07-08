@@ -1,41 +1,56 @@
-<div class="form-group">
-  <label>Type:</label>
-  <input type="radio" name="type"  [(ngModel)]="type" value="Flat" />Flat
-  <input type="radio" name="type" [(ngModel)]="type" value="House" />House
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-group">
+        <h4>Type:</h4>
+        <input type="radio" id="radio-flat" name="type" [(ngModel)]="type" value="Flat">Flat
+        <input type="radio" name="type" [(ngModel)]="type" value="House" />House
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Address</span>
+        </div>
+        <input type="text" [(ngModel)]="address" (change)="checkValidity()" class="form-control" placeholder="Insert address here..." aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="num-of-rooms-select">Number of Rooms</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="rooms" id="num-of-rooms-select" (change)="updateCanvas()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="house-area">House Area</span>
+        </div>
+        <input type="number" class="form-control" [(ngModel)]="area" />
+      </div>
+
+      <canvas #canvas width="600" height="300"></canvas>
+
+      <br />
+
+      <button class="btn btn-outline-success" (click)="submitObject()">Submit</button>
+      <div class="red-text">
+        {{ message }}
+      </div>
+      <br />
+      
+      <h3>Or import object from JSON file...</h3>
+      <input
+        type="file"
+        id="json-file"
+        accept=".json"
+        (change)="onFileSelected($event)"
+      />
+      <br><br>
+      <button class="btn btn-outline-secondary" (click)="goBack()">Back</button>
+    </div>
+  </div>
 </div>
-
-<div class="form-group">
-  <label>Address:</label>
-  <input type="text" [(ngModel)]="address" (change)="checkValidity()"/>
-</div>
-
-<div class="form-group">
-  <label>Number of Rooms:</label>
-  <select [(ngModel)]="rooms" (change)="updateCanvas()">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
-</div>
-
-
-<div class="form-group">
-    <label>House Area:</label>
-    <input type="number" [(ngModel)]="area" />
-</div>
-
-<canvas #canvas width="600" height="300"></canvas>
-
-<br>
-
-<button (click)="submitObject()">Submit</button>
-<div class="red-text">
-    {{message}}
-</div>
-<br>
-<button (click)="goBack()">Back</button>
-
-<h3>Or import object from JSON file...</h3>
-<label for="json-file">Import</label>
-<input type="file" id="json-file" accept=".json" (change)="onFileSelected($event)" />
-              

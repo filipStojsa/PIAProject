@@ -1,44 +1,59 @@
-<!-- app.component.html -->
-<div>
-  <label for="agency">Agency:</label>
-  <select id="agency" [(ngModel)]="selectedAgency">
-    <option *ngFor="let agency of agencies" [value]="agency.username">
-      {{ agency.agencyName }}
-    </option>
-  </select>
-  <div class="red-text">
-    {{ message[0] }}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="agency-select">Agency</label>
+        </div>
+        <select class="custom-select" id="agency-select" [(ngModel)]="selectedAgency">
+          <option *ngFor="let agency of agencies" [value]="agency.username">
+            {{ agency.agencyName }}
+          </option>
+        </select>
+      </div>
+      <div class="red-text">
+        {{ message[0] }}
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="object-select">Objects</label>
+        </div>
+        <select class="custom-select" id="object-select" [(ngModel)]="selectedObject">
+          <option *ngFor="let object of objects" [value]="object._id">
+            {{ object.type }} at {{ object.address }}
+          </option>
+        </select>
+      </div>
+      <div class="red-text">
+        {{ message[1] }}
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="date-start-picker">Starting Date</span>
+        </div>
+        <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" />
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="date-end-picker">Ending Date</span>
+        </div>
+        <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" />
+      </div>
+      <div class="red-text">
+        {{ message[2] }}
+        {{ message[3] }}
+      </div>
+
+      <button class="btn btn-success" (click)="submit()">Submit</button>
+      <br><br>
+      <button class="btn btn-secondary" (click)="goBack()">
+        Go Back
+      </button>
+
+    </div>
   </div>
 </div>
-
-<div>
-  <label for="objects">Objects:</label>
-  <select id="objects" [(ngModel)]="selectedObject">
-    <option *ngFor="let object of objects" [value]="object._id">
-      {{ object.type }} at {{ object.address }}
-    </option>
-  </select>
-  <div class="red-text">
-    {{ message[1] }}
-  </div>
-</div>
-
-<div>
-  <label for="startDate">Starting Date:</label>
-  <input type="date" id="startDate" [(ngModel)]="startDate" />
-</div>
-
-<div>
-  <label for="endDate">Ending Date:</label>
-  <input type="date" id="endDate" [(ngModel)]="endDate" />
-  <div class="red-text">
-    {{ message[2] }}
-    {{ message[3] }}
-  </div>
-</div>
-
-<button (click)="submit()">Submit</button>
-<br>
-<button class="btn btn-primary" (click)="goBack()">
-  Go Back
-</button>

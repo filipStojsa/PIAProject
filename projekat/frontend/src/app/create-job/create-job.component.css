@@ -2,3 +2,7 @@
     color: red;
     font-weight: bold;
 }
+
+.col-lg-12 {
+    margin-top: 20px;
+}

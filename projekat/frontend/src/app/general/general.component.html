@@ -1,33 +1,39 @@
-<head>
-    <title>Agency List</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
 <body>
-    <div class="agency-list">
-        <div class="search-bar">
-            <label for="search-field-name">Search by name: </label> 
-            <input type="text" name="search-field--name" (change)="searchByName()" [(ngModel)]="searchStringName">
-            
-            <label for="search-field-address">Search by address: </label> 
-            <input type="text" name="search-field-address" (change)="searchByAddress()" [(ngModel)]="searchStringAddress">
+  <div class="agency-list">
+    <div class="search-bar">
+      <label>Search by name: </label>
+      <input
+        type="text"
+        (change)="searchByName()"
+        [(ngModel)]="searchStringName"
+      />
 
-            <button (click)="sort('asc')">Ascending</button>
-            <button (click)="sort('desc')">Descending</button>
-        </div>
+      <label>Search by address: </label>
+      <input
+        type="text"
+        (change)="searchByAddress()"
+        [(ngModel)]="searchStringAddress"
+      />
 
-        <div class="card-deck" *ngFor="let agency of allAgencies">
-            <div class="card agency-card">
-                <img src={{agency.image}} class="card-img-top" alt="Agency 1">
-                <div class="card-body">
-                    <h5 class="card-title">{{agency.agencyName}}</h5>
-                    <h6>{{agency.description}}</h6>
-                </div>
-                <button class="btn btn-primary" (click)="seeMore(agency.username)">See more</button>
-            </div>
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="goBack()" *ngIf="showButton()">
-            Go Back
-        </button>
+      <button class="btn btn-secondary sort-button" (click)="sort('asc')">Ascending</button>
+      <button class="btn btn-secondary sort-button" (click)="sort('desc')">Descending</button>
     </div>
+
+    <div class="card-deck" *ngFor="let agency of allAgencies">
+      <div class="card agency-card">
+        <img src="{{ agency.image }}" class="card-img-top" alt="Agency 1" />
+        <div class="card-body">
+          <h5 class="card-title">{{ agency.agencyName }}</h5>
+          <h6>{{ agency.description }}</h6>
+        </div>
+        <button class="btn btn-outline-secondary" (click)="seeMore(agency.username)">
+          See more
+        </button>
+      </div>
+    </div>
+    <br />
+    <button class="btn btn-primary" (click)="goBack()" *ngIf="showButton()">
+      Go Back
+    </button>
+  </div>
 </body>

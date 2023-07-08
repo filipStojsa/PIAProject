@@ -1,166 +1,307 @@
 <head>
   <title>Login Form</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  />
 </head>
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <form>
-          <h2 class="text-center">Register</h2>
-  
-          <div class="form-group">
-            <label for="user-type">User Type</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="userType" id="user" value="user" [(ngModel)]="selectedUserType" required>
-              <label class="form-check-label" for="user">User</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="userType" id="agency" value="agency" [(ngModel)]="selectedUserType">
-              <label class="form-check-label" for="agency">Agency</label>
-            </div>
-          </div>
-  
-          <!-- User Fields -->
-          <div *ngIf="selectedUserType === 'user'">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[0]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="surname">Surname</label>
-              <input type="text" id="surname" name="surname" [(ngModel)]="user.surname" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[1]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" [(ngModel)]="user.username" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[2]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[3]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="tel">Telephone</label>
-              <input type="tel" id="tel" name="tel" [(ngModel)]="user.tel" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[4]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" required>
-              <div class="bold-red">
-                {{messageUser[5]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="image">Image</label>
-              <input type="file" id="image" name="image" (change)="onImageChange($event)" class="form-control-file" accept="image/*" required>
-              <div class="bold-red">
-                {{messageUser[6]}}
-              </div>
-            </div>
-          </div>
-  
-          <!-- Agency Fields -->
-          <div *ngIf="selectedUserType === 'agency'">
-            <div class="form-group">
-              <label for="agencyName">Agency Name</label>
-              <input type="text" id="agencyName" name="agencyName" [(ngModel)]="agency.agencyName" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[0]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="state">State</label>
-              <input type="text" id="state" name="state" [(ngModel)]="agency.state" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[1]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" name="city" [(ngModel)]="agency.city" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[2]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input type="text" id="address" name="address" [(ngModel)]="agency.adress" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[3]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="pib">PIB</label>
-              <input type="text" id="pib" name="pib" [(ngModel)]="agency.pib" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[4]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id="description" name="description" [(ngModel)]="agency.description" class="form-control" required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" [(ngModel)]="agency.username" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[5]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" [(ngModel)]="agency.password" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[6]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="tel">Telephone</label>
-              <input type="tel" id="tel" name="tel" [(ngModel)]="agency.tel" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[7]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" [(ngModel)]="agency.email" class="form-control" required>
-              <div class="bold-red">
-                {{messageAgency[8]}}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="image">Image</label>
-              <input type="file" id="image" name="image" (change)="onImageChange($event)" class="form-control-file" accept="image/*" required>
-              <div class="bold-red">
-                {{messageAgency[9]}}
-              </div>
-            </div>
-          </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form>
+        <h2 class="text-center">Register</h2>
 
-          <!-- <div *ngIf="image">
-            <img [src]="image" alt="Loaded Image">
-          </div> -->
-          
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary" (click)="register()">Register</button>
+        <div class="form-group">
+          <label for="user-type">User Type</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="userType"
+              id="user"
+              value="user"
+              [(ngModel)]="selectedUserType"
+              required
+            />
+            <label class="form-check-label" for="user">User</label>
           </div>
-          <img id="default-image" src="assets/generic-user-icon.jpg">
-        </form>
-      </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="userType"
+              id="agency"
+              value="agency"
+              [(ngModel)]="selectedUserType"
+            />
+            <label class="form-check-label" for="agency">Agency</label>
+          </div>
+        </div>
+
+        <!-- User Fields -->
+        <div *ngIf="selectedUserType === 'user'">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="user.name"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[0] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname</label>
+            <input
+              type="text"
+              id="surname"
+              name="surname"
+              [(ngModel)]="user.surname"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[1] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="user.username"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[2] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="user.password"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[3] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tel">Telephone</label>
+            <input
+              type="tel"
+              id="tel"
+              name="tel"
+              [(ngModel)]="user.tel"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[4] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="user.email"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[5] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              (change)="onImageChange($event)"
+              class="form-control-file"
+              accept="image/*"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[6] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Agency Fields -->
+        <div *ngIf="selectedUserType === 'agency'">
+          <div class="form-group">
+            <label for="agencyName">Agency Name</label>
+            <input
+              type="text"
+              id="agencyName"
+              name="agencyName"
+              [(ngModel)]="agency.agencyName"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[0] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              [(ngModel)]="agency.state"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[1] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              [(ngModel)]="agency.city"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[2] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              [(ngModel)]="agency.adress"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[3] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pib">PIB</label>
+            <input
+              type="text"
+              id="pib"
+              name="pib"
+              [(ngModel)]="agency.pib"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[4] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="agency.description"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="agency.username"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[5] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="agency.password"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[6] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tel">Telephone</label>
+            <input
+              type="tel"
+              id="tel"
+              name="tel"
+              [(ngModel)]="agency.tel"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[7] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="agency.email"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[8] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              (change)="onImageChange($event)"
+              class="form-control-file"
+              accept="image/*"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[9] }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" (click)="register()">
+            Register
+          </button>
+        </div>
+        <img id="default-image" src="assets/generic-user-icon.jpg" />
+      </form>
     </div>
   </div>
-  
+</div>

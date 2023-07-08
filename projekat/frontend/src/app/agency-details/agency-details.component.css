@@ -1,5 +1,6 @@
 body {
   padding: 20px;
+  margin-bottom: 60px;
 }
 
 .user-details {
@@ -15,4 +16,9 @@ body {
   top: 5px;
   right: 5px;
 
+}
+
+.agency-details-row {
+  background-color: #f6f6f6;
+  padding: 20px;
 }
