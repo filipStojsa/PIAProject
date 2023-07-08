@@ -34,3 +34,8 @@
 </div>
 <br>
 <button (click)="goBack()">Back</button>
+
+<h3>Or import object from JSON file...</h3>
+<label for="json-file">Import</label>
+<input type="file" id="json-file" accept=".json" (change)="onFileSelected($event)" />
+              

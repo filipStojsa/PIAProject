@@ -3,6 +3,7 @@ import { Room } from '../models/rooms';
 import { ObjectService } from '../object.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
+import { Object } from '../models/object';
 
 @Component({
   selector: 'app-user-object',
@@ -115,7 +116,7 @@ export class UserObjectComponent implements OnInit {
       JSON.parse(localStorage.getItem('loggedUser')).username,
       rooms
     ).subscribe((resp) => {
-      console.log('ivana je sigurna')
+      alert('New object created!')
     })
   }
 
@@ -132,5 +133,32 @@ export class UserObjectComponent implements OnInit {
   goBack() {
     this.router.navigate(['user']);
   }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      const fileContent: string = e.target.result;
+      const jsonObject: Object = JSON.parse(fileContent);
+
+      // Handle inserted Object...
+      if(jsonObject.num < 0 || jsonObject.num > 3) {
+        alert("Inserted object doesn't have between 0 and 3 rooms")
+        return
+      }
+      if(jsonObject.type != 'Flat' && jsonObject.type != 'House') {
+        alert("Inserted object is not Flat or House!")
+        return
+      }
+      // Check is OK
+      this.service.addObject(
+        jsonObject.type, jsonObject.address, jsonObject.num, jsonObject.area, 
+        jsonObject.user,
+        jsonObject.rooms
+      ).subscribe((resp) => {
+        alert('New object inserted!')
+      })
+    };
+    reader.readAsText(file);  }
 
 }

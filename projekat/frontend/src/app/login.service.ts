@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Room } from './models/rooms';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class LoginService {
     return this.http.post(`${this.uri}/user/login`, data)
   }
 
-  addObject(type, address, num, area, user, rooms) {
+  addObject(type: string, address: string, num: number, area: number, user: string, rooms: Array<Room>) {
     const data = {
       type: type,
       address: address,
