@@ -11,6 +11,19 @@ class AgencyController {
             // To be implemented...
             console.log('To be implemented...');
         };
+        this.getAgency = (req, res) => {
+            let username = req.params.agencyUsername;
+            agency_1.default.findOne({ 'username': username }, (err, agency) => {
+                console.log(agency);
+                if (err)
+                    console.log(err);
+                else {
+                    if (agency) {
+                        res.json(agency);
+                    }
+                }
+            });
+        };
         this.register = (req, res) => {
             let agencyName = req.body.agencyName;
             let state = req.body.state;

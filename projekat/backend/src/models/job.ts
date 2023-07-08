@@ -23,6 +23,9 @@ let Job = new Schema({
     },
     offer: {
         type: Number
+    },
+    workers: {
+        type: Number
     }
 })
 

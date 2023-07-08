@@ -39,5 +39,9 @@ agencyRouter.route('/getAllAgencies').get(
     (req, res)=>new AgencyController().getAllAgencies(req, res)
 )
 
+agencyRouter.route('/getAgency/:agencyUsername').get(
+    (req, res)=>new AgencyController().getAgency(req, res)
+)
+
 
 export default agencyRouter;

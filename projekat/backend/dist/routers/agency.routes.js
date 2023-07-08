@@ -15,5 +15,6 @@ agencyRouter.route('/editComment').post((req, res) => new agency_controller_1.Ag
 agencyRouter.route('/modifyAgencyField').post((req, res) => new agency_controller_1.AgencyController().modifyAgencyField(req, res));
 agencyRouter.route('/deleteAgency').post((req, res) => new agency_controller_1.AgencyController().deleteAgency(req, res));
 agencyRouter.route('/getAllAgencies').get((req, res) => new agency_controller_1.AgencyController().getAllAgencies(req, res));
+agencyRouter.route('/getAgency/:agencyUsername').get((req, res) => new agency_controller_1.AgencyController().getAgency(req, res));
 exports.default = agencyRouter;
 //# sourceMappingURL=agency.routes.js.map

@@ -7,6 +7,19 @@ export class AgencyController{
         console.log('To be implemented...')
     }
 
+    getAgency = (req: express.Request, res: express.Response) => {
+        let username = req.params.agencyUsername
+        AgencyModel.findOne({'username': username}, (err, agency)=>{
+            console.log(agency)
+            if(err) console.log(err)
+            else {
+                if(agency) {
+                    res.json(agency)
+                }
+            }
+        })
+    }
+
     register = (req: express.Request, res: express.Response) => {
         let agencyName = req.body.agencyName
         let state = req.body.state

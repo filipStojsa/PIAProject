@@ -91,6 +91,7 @@ class ObjectController {
                     start: startDate,
                     end: endDate,
                     offer: 0,
+                    workers: 0
                 },
             ]);
             res.json({ msg: "ok" });
@@ -169,6 +170,20 @@ class ObjectController {
                 }
                 else {
                     console.log(updatedObject);
+                    res.json({ msg: "ok" });
+                }
+            });
+        };
+        this.addJobWorkers = (req, res) => {
+            let _id = req.body._id;
+            let workers = req.body.workers;
+            console.log(_id);
+            job_1.default.updateOne({ _id: _id }, { $set: { workers: workers } }, { new: true }, (err, updatedJob) => {
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    console.log(updatedJob);
                     res.json({ msg: "ok" });
                 }
             });

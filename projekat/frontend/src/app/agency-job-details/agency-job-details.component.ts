@@ -18,6 +18,9 @@ export class AgencyJobDetailsComponent implements OnInit {
 
   myJob: Job
   jobsObject: Object
+  availableWorkers: number
+
+  workers: string
 
   roomProgress = []
 
@@ -26,9 +29,16 @@ export class AgencyJobDetailsComponent implements OnInit {
       this.myJob = job
       this.jobService.getObject(job.object).subscribe((obj: Object) => {
         this.jobsObject = obj
+        this.availableWorkers = JSON.parse(localStorage.getItem('loggedAgency'))['workers']
+        if(this.availableWorkers < this.jobsObject.num && this.myJob.jobStatus == 'accepted') {
+          for (let i = 0; i < this.jobsObject.num; i++) {
+            this.jobsObject.rooms[i].color = 'yellow'
+          }
+        }
         this.fillCanvas()
       })
     })
+
   }
 
   fillCanvas() {
@@ -103,21 +113,56 @@ export class AgencyJobDetailsComponent implements OnInit {
   }
 
   startJob() {
+    if(this.workers == undefined) {
+      alert('Select number of workers!')
+      return
+    }
+
+    let newAgencyWorkers = parseInt(JSON.parse(localStorage.getItem('loggedAgency'))['workers']) - parseInt(this.workers)
+
     this.jobService.changeJobStatus(
       'inProgress',
       localStorage.getItem('jobId')
     ).subscribe((resp) => {
+      
       if(resp['msg'] == 'ok') {
-        this.router.navigate(['agency/jobs']);
+
+        this.jobService.addJobWorkers(
+          localStorage.getItem('jobId'),
+          parseInt(this.workers)
+        ).subscribe((resp) => {
+
+          if(resp['msg'] == 'ok') {
+
+            this.jobService.changeAgencyField(
+              'workers',
+              newAgencyWorkers+'',
+              JSON.parse(localStorage.getItem('loggedAgency'))['username']
+            ).subscribe((resp) => {
+
+              if(resp['msg'] == 'ok') {
+                alert('Succesfuly started the job!')
+                this.router.navigate(['agency/jobs']);
+              }
+
+            })
+          }
+        })
       }
     })
   }
 
   showStartJobButton() {
-    if(this.myJob.jobStatus == 'accepted') {
+    if(this.availableWorkers >= this.jobsObject.num && this.myJob.jobStatus == 'accepted') {
       return true
     }
     return false
+  }
+
+  generateArray() {
+    let start = this.jobsObject.num
+    let end = this.availableWorkers
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   }
 
   doWork() {

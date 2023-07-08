@@ -26,6 +26,9 @@ let Job = new Schema({
     },
     offer: {
         type: Number
+    },
+    workers: {
+        type: Number
     }
 });
 exports.default = mongoose_1.default.model('JobModel', Job, 'job');

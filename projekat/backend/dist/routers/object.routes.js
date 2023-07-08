@@ -13,6 +13,7 @@ objectRouter.route('/getMyJobs/:username').get((req, res) => new object_controll
 objectRouter.route('/getAgencyJobs/:agencyUsername').get((req, res) => new object_controller_1.ObjectController().getAgencyJobs(req, res));
 objectRouter.route('/addJob').post((req, res) => new object_controller_1.ObjectController().addJob(req, res));
 objectRouter.route('/makeAnOffer').post((req, res) => new object_controller_1.ObjectController().makeAnOffer(req, res));
+objectRouter.route('/addJobWorkers').post((req, res) => new object_controller_1.ObjectController().addJobWorkers(req, res));
 objectRouter.route('/changeObjectsColor').post((req, res) => new object_controller_1.ObjectController().changeObjectsColor(req, res));
 objectRouter.route('/getObject/:id').get((req, res) => new object_controller_1.ObjectController().getObject(req, res));
 objectRouter.route('/getJob/:id').get((req, res) => new object_controller_1.ObjectController().getJob(req, res));

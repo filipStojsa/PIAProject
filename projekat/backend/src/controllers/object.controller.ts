@@ -97,6 +97,7 @@ export class ObjectController {
         start: startDate,
         end: endDate,
         offer: 0,
+        workers: 0
       },
     ]);
 
@@ -205,4 +206,25 @@ export class ObjectController {
       }
     );
   };
+
+  addJobWorkers = (req: express.Request, res: express.Response) => {
+    let _id = req.body._id;
+    let workers = req.body.workers;
+
+    console.log(_id);
+    JobModel.updateOne(
+      { _id: _id },
+      { $set: { workers: workers } },
+      { new: true },
+      (err, updatedJob) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(updatedJob);
+          res.json({ msg: "ok" });
+        }
+      }
+    );
+  }
+
 }

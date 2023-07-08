@@ -7,4 +7,5 @@ export class Job {
     end: Date
     display: string
     offer: number
+    workers: number
 }

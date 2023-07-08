@@ -79,4 +79,26 @@ export class JobService {
 
     return this.http.post(`${this.uri}/object/changeObjectsColor`, data)
   }
+
+  addJobWorkers(_id: string, workers: number) {
+    const data = {
+      _id: _id,
+      workers: workers
+    }
+    return this.http.post(`${this.uri}/object/addJobWorkers`, data)
+    
+  }
+
+  changeAgencyField(field: string, value: string, username: string) {
+    const data = {
+      field: field,
+      value: value,
+      username: username
+    }
+    return this.http.post(`${this.uri}/agency/modifyAgencyField`, data)
+  }
+
+  getAgency(username) {
+    return this.http.get(`${this.uri}/agency/getAgency/${username}`)
+  }
 }

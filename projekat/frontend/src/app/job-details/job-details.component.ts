@@ -4,6 +4,7 @@ import { Object } from '../models/object';
 import { Router } from '@angular/router';
 import { JobService } from '../job.service';
 import { User } from '../models/user';
+import { Agency } from '../models/agency';
 
 @Component({
   selector: 'app-job-details',
@@ -128,8 +129,24 @@ export class JobDetailsComponent implements OnInit  {
   payJob() {
     this.jobService.payJob(localStorage.getItem('jobId')).subscribe((resp) => {
       if(resp['msg'] == 'ok') {
-        alert('Job payed succesfully!')
-        this.router.navigate(['user/my_jobs'])
+
+        // Find out how many workers agency now has
+        this.jobService.getAgency(this.myJob.agencyUsername).subscribe((agency: Agency) => {
+          let newWorkers = parseInt(agency.workers) + this.myJob.workers
+
+          // Add workers to agency
+          this.jobService.changeAgencyField(
+            'workers',
+            newWorkers+'',
+            agency.username
+          ).subscribe((resp) => {
+            if(resp['msg'] == 'ok') {
+              alert('Job payed succesfully!')
+              this.router.navigate(['user/my_jobs'])
+            }
+          })
+          
+        })
       }
     })
   }

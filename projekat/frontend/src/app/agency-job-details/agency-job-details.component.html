@@ -4,7 +4,7 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
   />
 </head>
-<div *ngIf="myJob" class="container">
+<div *ngIf="myJob" class="container agency-job-container">
   <h2 class="mt-4">Job Details</h2>
   <div class="card">
     <div class="card-body">
@@ -43,9 +43,14 @@
             <canvas #canvas width="600" height="300"></canvas>
           </li>
           <li class="list-group-item" *ngIf="showStartJobButton()">
-            <button class="btn btn-success" (click)="startJob()">
-              Start work!
-            </button>
+            <div class="input-group">
+              <select class="custom-select" id="inputGroupSelect04" required [(ngModel)]="workers">
+                <option *ngFor="let item of generateArray(); index as currentIndex" value="{{item}}">{{item}}</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-outline-success" (click)="startJob()">Start work!</button>
+              </div>
+            </div>
           </li>
         </ul>
       </ul>
