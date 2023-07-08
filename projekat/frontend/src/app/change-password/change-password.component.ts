@@ -15,7 +15,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   oldPassword: string;
-  confirmOldPassword: string;
+  confirmNewPassword: string;
   newPassword: string;
 
   message: string
@@ -34,17 +34,17 @@ export class ChangePasswordComponent implements OnInit {
       return
     }
 
-    if (this.oldPassword != this.confirmOldPassword) {
-      this.message = 'Old and new password do not match!'
-      return
-    }
 
     // Old password confirmed, check new password policy
     if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.newPassword)) {
       this.message = "New Password does not enforce the rules"
       return
     }
-
+    
+    if (this.newPassword != this.confirmNewPassword) {
+      this.message = 'New password not confirmed!'
+      return
+    }
     // New password OK, change it
     if(localStorage.getItem('loggedUser')) {
       let username = JSON.parse(localStorage.getItem('loggedUser'))['username']

@@ -39,7 +39,8 @@ const routes: Routes = [
   {path: "admin/users", component: AdminUsersComponent},
   {path: "admin/jobs", component: AdminJobsComponent},
   {path: "change_password", component: ChangePasswordComponent},
-  {path: "user/object/details", component: UserObjectDetailsComponent}
+  {path: "user/object/details", component: UserObjectDetailsComponent},
+  {path: "admin/login", component: LoginComponent}
 ];
 
 @NgModule({
