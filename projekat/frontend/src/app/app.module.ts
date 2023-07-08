@@ -22,6 +22,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminAgenciesComponent } from './admin-agencies/admin-agencies.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
     AdminComponent,
     AdminAgenciesComponent,
     AdminUsersComponent,
-    AdminJobsComponent
+    AdminJobsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

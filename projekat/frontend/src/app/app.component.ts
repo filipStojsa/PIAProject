@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PIA Rocks';
+
+  showLogout() {
+    if(localStorage.getItem('loggedUser') || localStorage.getItem('loggedAgency') || localStorage.getItem('loggedAdmin')) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
 }
