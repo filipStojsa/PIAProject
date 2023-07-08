@@ -1,18 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Room } from '../models/rooms';
 import { ObjectService } from '../object.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { Object } from '../models/object';
+import { JobService } from '../job.service';
 
 @Component({
   selector: 'app-user-object',
   templateUrl: './user-object.component.html',
   styleUrls: ['./user-object.component.css']
 })
-export class UserObjectComponent implements OnInit {
+export class UserObjectComponent implements AfterViewInit {
 
-  constructor(private service: LoginService, private router: Router) { }
+  constructor(private service: LoginService, private objectService: ObjectService, private router: Router) { }
 
   type: string
   address: string
@@ -23,7 +24,14 @@ export class UserObjectComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
 
-  ngOnInit(): void {
+  myObjects = []
+  loggedUsername: string
+
+  ngAfterViewInit(): void {
+    this.loggedUsername = JSON.parse(localStorage.getItem('loggedUser'))['username']
+    this.objectService.getMyObjects(this.loggedUsername).subscribe((objects: Object[]) => {
+      this.myObjects = objects
+    })
   }
 
   checkValidity() {
@@ -159,6 +167,21 @@ export class UserObjectComponent implements OnInit {
         alert('New object inserted!')
       })
     };
-    reader.readAsText(file);  }
+    reader.readAsText(file);  
+  }
+
+  deleteObject(id) {
+    this.objectService.deleteObject(id).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Object deleted succesfuly!')
+        this.router.navigate(['user']);
+      }
+    })
+  }
+
+  gotoDetails(id) {
+    localStorage.setItem('object', id)
+    this.router.navigate(['user/object/details']);
+  }
 
 }

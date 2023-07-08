@@ -188,6 +188,42 @@ class ObjectController {
                 }
             });
         };
+        this.deleteObject = (req, res) => {
+            let _id = req.body._id;
+            console.log(_id);
+            object_1.default.deleteOne({ '_id': _id }, (err, result) => {
+                if (err)
+                    console.error(err);
+                if (result.deletedCount === 0) {
+                    return res.status(404).json({ 'msg': 'notFound' });
+                }
+                res.json({ 'msg': 'ok' });
+            });
+        };
+        this.changeObjectField = (req, res) => {
+            let _id = req.body._id;
+            let field = req.body.field;
+            let value = req.body.value;
+            object_1.default.findOne({ '_id': _id }, (err, obj) => {
+                console.log(obj);
+                if (err)
+                    console.log(err);
+                else {
+                    if (obj) {
+                        object_1.default.updateOne({ '_id': _id }, { $set: { [field]: value } }, (err, resp) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
     }
 }
 exports.ObjectController = ObjectController;

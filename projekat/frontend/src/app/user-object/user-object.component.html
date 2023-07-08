@@ -1,8 +1,38 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-lg-12">
+      <div id="all-objects">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Type</th>
+              <th>Rooms</th>
+              <th>Area</th>
+              <th>More</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let object of myObjects">
+              <td>{{ object.address }}</td>
+              <td>{{ object.type }}</td>
+              <td>{{ object.num }}</td>
+              <td>{{ object.area }}</td>
+              <td>
+                <button class="btn btn-info" (click)="gotoDetails(object._id)">More</button>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteObject(object._id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <hr>
       <div class="form-group">
-        <h4>Type:</h4>
+        <h4>Add new:</h4>
         <input type="radio" id="radio-flat" name="type" [(ngModel)]="type" value="Flat">Flat
         <input type="radio" name="type" [(ngModel)]="type" value="House" />House
       </div>

@@ -27,6 +27,10 @@ objectRouter.route('/addJob').post(
     (req, res) => new ObjectController().addJob(req, res)
 )
 
+objectRouter.route('/deleteObject').post(
+    (req, res) => new ObjectController().deleteObject(req, res)
+)
+
 objectRouter.route('/makeAnOffer').post(
     (req, res) => new ObjectController().makeAnOffer(req, res)
 )
@@ -53,6 +57,10 @@ objectRouter.route('/payJob').post(
 
 objectRouter.route('/changeJobStatus').post(
     (req, res) => new ObjectController().changeJobStatus(req, res)
+)
+
+objectRouter.route('/changeObjectField').post(
+    (req, res) => new ObjectController().changeObjectField(req, res)
 )
 
 export default objectRouter;

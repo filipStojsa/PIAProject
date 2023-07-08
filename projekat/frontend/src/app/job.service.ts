@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Room } from './models/rooms';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +101,32 @@ export class JobService {
 
   getAgency(username) {
     return this.http.get(`${this.uri}/agency/getAgency/${username}`)
+  }
+
+  changeObjectField(field: string, value: string, id: string) {
+    const data = {
+      field: field,
+      value: value,
+      _id: id
+    }
+    return this.http.post(`${this.uri}/object/changeObjectField`, data)
+  }
+
+  changeObjectNum(value: number, id: string) {
+    const data = {
+      field: 'num',
+      value: value,
+      _id: id
+    }
+    return this.http.post(`${this.uri}/object/changeObjectField`, data)
+  }
+
+  changeObjectRooms(value: Array<Room>, id: string) {
+    const data = {
+      field: 'rooms',
+      value: value,
+      _id: id
+    }
+    return this.http.post(`${this.uri}/object/changeObjectField`, data)
   }
 }

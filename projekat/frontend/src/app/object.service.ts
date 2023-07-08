@@ -29,4 +29,12 @@ export class ObjectService {
   getMyObjects(username: string) {
     return this.http.get(`${this.uri}/object/getMyObjects/${username}`)
   }
+
+  deleteObject(id: string) {
+    const data = {
+      _id: id
+    }
+
+    return this.http.post(`${this.uri}/object/deleteObject`, data)
+  }
 }
