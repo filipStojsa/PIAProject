@@ -31,3 +31,7 @@
 .job-table button:hover {
   background-color: #45a049;
 }
+
+#deny-button {
+  background-color: red;
+}

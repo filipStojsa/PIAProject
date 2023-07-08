@@ -11,6 +11,7 @@
             <th>End</th>
             <th>Offer</th>
             <th>Details</th>
+            <th>Deny this job</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
               <button (click)="makeAnOffer(job._id)">Send offer</button>
             </td>
             <td><button (click)="showDetails(job._id)">Details</button></td>
+            <td><button id="deny-button" (click)="denyJob(job._id)">Deny</button></td>
           </tr>
         </tbody>
       </table>

@@ -68,6 +68,18 @@ export class AgencyJobsComponent implements OnInit {
     }
   }
 
+  denyJob(id: string) {
+    this.jobService.changeJobStatus(
+      'denied',
+      id
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Job denied!')
+        this.router.navigate(['agency']);
+      }
+    })
+  }
+
   showDetails(id) {
     localStorage.setItem('jobId', id)
     this.router.navigate(['agency/job/details']);
