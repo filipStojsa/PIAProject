@@ -72,8 +72,20 @@ class AgencyController {
             console.log('To be implemented...');
         };
         this.checkIsEmailUnique = (req, res) => {
-            // To be implemented...
-            console.log('To be implemented - checkIsEmailUnique...');
+            let email = req.body.email;
+            agency_1.default.findOne({ 'email': email }, (err, agency) => {
+                console.log(agency);
+                if (err)
+                    console.log(err);
+                else {
+                    if (agency) {
+                        res.json({ 'msg': 'false' });
+                    }
+                    else {
+                        res.json({ 'msg': 'true' });
+                    }
+                }
+            });
         };
         this.getAllAgencies = (req, res) => {
             agency_1.default.find({}, (err, agencies) => {

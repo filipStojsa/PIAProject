@@ -71,8 +71,19 @@ export class AgencyController{
     }
 
     checkIsEmailUnique = (req: express.Request, res: express.Response) => {
-        // To be implemented...
-        console.log('To be implemented - checkIsEmailUnique...')
+        let email = req.body.email;
+        AgencyModel.findOne({'email': email}, (err, agency)=>{
+            console.log(agency)
+            if(err) console.log(err)
+            else {
+                if(agency) {
+                    res.json({'msg': 'false'})
+                }
+                else {
+                    res.json({'msg': 'true'})
+                }
+            }
+        })
     }
 
     getAllAgencies = (req: express.Request, res: express.Response) => {

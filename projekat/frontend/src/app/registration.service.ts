@@ -54,12 +54,16 @@ export class RegistrationService {
     }
   }
 
-  checkIsEmailUnique(emailFromForm) {
+  checkIsEmailUnique(emailFromForm, type) {
     const data = {
       email: emailFromForm
     }
-
-    return this.http.post(`${this.uri}/user/checkIsEmailUnique`, data)
+    if(type == 'user') {
+      return this.http.post(`${this.uri}/user/checkIsEmailUnique`, data)
+    }
+    else {
+      return this.http.post(`${this.uri}/agency/checkIsEmailUnique`, data)
+    }
   }
 
   changeUserField(field: string, value: string, username: string) {

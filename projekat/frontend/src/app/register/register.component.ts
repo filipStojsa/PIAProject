@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   agency = new Agency
 
   image: string = ''
+  isImageOK = true
 
   messageUser = []
   messageAgency = []
@@ -37,6 +38,10 @@ export class RegisterComponent implements OnInit {
         console.log(`Width: ${img.width}, Height: ${img.height}`);
         if(img.width >= 100 && img.width <= 300 && img.height >= 100 && img.height <= 300) {
           this.image = reader.result as string
+          this.isImageOK = true
+        }
+        else {
+          this.isImageOK = false
         }
       }
     };
@@ -67,43 +72,30 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    this.service.checkIsUsernameUnique(this.user.username, 'user').subscribe((resp) => {
-      if(resp['msg'] == 'false') {
-        this.messageUser[2] = "Username is not unique"
-        isOK = false
-      }
-    })
-
+    
     // Check user's password validity
     if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.user.password)) {
       this.messageUser[3] = "Password does not enforce the rules"
       isOK = false
     }
-
+    
     // Check user's telephone validity
     if(!/^(?:(?:\+|00)(?:\d{1,3})[\s-]?)?(?:\d{1,4}[\s-]?){1,5}\d{1,4}$/.test(this.user.tel)) {
       this.messageUser[4] = "Telephone is not in correct format"
       isOK = false
     }
-
+    
     // Check user's email validity
     if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.user.email)) {
       this.messageUser[5] = "Email is not in correct format"
       isOK = false
     }
-
-    // this.service.checkIsEmailUnique(this.user.email).subscribe((resp) => {
-    //   if(resp['msg'] == 'false') {
-    //     this.message[2] = "Email is not unique to username"
-    //     isOK = false
-    //   }
-    // })
-
-    if(this.image == '') {
-      this.messageUser[6] = "Image size is not correct or image is not loaded!"
+    
+    if(!this.isImageOK && this.image == '') {
+      this.messageUser[6] = "Image size is not correct between 100px and 300px!"
       isOK = false
     }
-
+    
     return isOK
   }
 
@@ -148,12 +140,7 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    this.service.checkIsUsernameUnique(this.agency.username, 'agency').subscribe((resp) => {
-      if(resp['msg'] == 'false') {
-        this.messageAgency[5] = "Username is not unique"
-        isOK = false
-      }
-    })
+    
 
     // Check user's password validity
     if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.agency.password)) {
@@ -173,15 +160,8 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    // this.service.checkIsEmailUnique(this.user.email).subscribe((resp) => {
-    //   if(resp['msg'] == 'false') {
-    //     this.message[2] = "Email is not unique to username"
-    //     isOK = false
-    //   }
-    // })
-
-    if(this.image == '') {
-      this.messageAgency[9] = "Image size is not correct or image is not loaded!"
+    if(!this.isImageOK && this.image == '') {
+      this.messageAgency[9] = "Image size is not correct between 100px and 300px!"
       isOK = false
     }
 
@@ -191,44 +171,88 @@ export class RegisterComponent implements OnInit {
   register() {
     if(this.selectedUserType == 'user') {
       if(this.checkUserFields()) {
-        this.user.image = this.image
-        this.service.registerUser(this.user).subscribe((resp) => {
-          if(resp['msg'] == 'OK') {
-            if(localStorage.getItem('loggedAdmin')) {
-              this.service.changeUserField(
-                'status',
-                'ok',
-                this.user.username
-              ).subscribe((resp) => {
-                alert('User is added succesfuly by admin!')
-              })
-            }
-            else {
-              alert('User is added succesfuly!')
-            }
+        // Check if username is Unique
+        this.service.checkIsUsernameUnique(this.user.username, 'user').subscribe((resp) => {
+          if(resp['msg'] == 'false') {
+            this.messageUser[2] = "Username is not unique"
+            return
           }
+
+          // Username is OK, now check email
+          this.service.checkIsEmailUnique(this.user.email, 'user').subscribe((resp) => {
+            if(resp['msg'] == 'false') {
+              this.messageUser[5] = "Email is not unique to username"
+              return
+            }
+
+            // Email is unique, go on...
+            if(this.isImageOK && this.image == '') {
+              let img = document.getElementById('default-image')
+              let imgURL = img.getAttribute('src')
+              this.image = imgURL
+            }
+            this.user.image = this.image
+            this.service.registerUser(this.user).subscribe((resp) => {
+              if(resp['msg'] == 'OK') {
+                if(localStorage.getItem('loggedAdmin')) {
+                  this.service.changeUserField(
+                    'status',
+                    'ok',
+                    this.user.username
+                  ).subscribe((resp) => {
+                    alert('User is added succesfuly by admin!')
+                  })
+                }
+                else {
+                  alert('User is added succesfuly!')
+                }
+              }
+            })
+          })
         })
       }
     }
     else {
       if(this.checkAgencyFields()) {
-        this.agency.image = this.image
-        this.service.registerAgency(this.agency).subscribe((resp) => {
-          if(resp['msg'] == 'OK') {
-            if(localStorage.getItem('loggedAdmin')) {
-              this.service.changeAgencyField(
-                'status',
-                'ok',
-                this.agency.username
-              ).subscribe((resp) => {
-                alert('Agency is added succesfuly by admin!')
-              })
-            }
-            else {
-              alert('Agency is added succesfuly!')
-            }
+        this.service.checkIsUsernameUnique(this.agency.username, 'agency').subscribe((resp) => {
+          if(resp['msg'] == 'false') {
+            this.messageAgency[5] = "Username is not unique"
+            return
           }
+
+          // Username is ok, now check email
+          this.service.checkIsEmailUnique(this.agency.email, 'agency').subscribe((resp) => {
+            if(resp['msg'] == 'false') {
+              this.messageAgency[8] = "Email is not unique to username"
+              return
+            }
+            // Email is unique, go on...
+            if(this.isImageOK && this.image == '') {
+              let img = document.getElementById('default-image')
+              let imgURL = img.getAttribute('src')
+              this.image = imgURL
+            }
+            this.agency.image = this.image
+            this.service.registerAgency(this.agency).subscribe((resp) => {
+              if(resp['msg'] == 'OK') {
+                if(localStorage.getItem('loggedAdmin')) {
+                  this.service.changeAgencyField(
+                    'status',
+                    'ok',
+                    this.agency.username
+                  ).subscribe((resp) => {
+                    alert('Agency is added succesfuly by admin!')
+                  })
+                }
+                else {
+                  alert('Agency is added succesfuly!')
+                }
+              }
+            })
+          })
+
         })
+
       }
     }
   }

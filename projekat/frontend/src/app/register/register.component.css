@@ -41,3 +41,7 @@ textarea {
   font-weight: bold;
   color: red;
 }
+
+#default-image {
+  width: 0%;
+}
