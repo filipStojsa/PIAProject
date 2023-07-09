@@ -12,6 +12,7 @@ agencyRouter.route('/login').post((req, res) => new agency_controller_1.AgencyCo
 agencyRouter.route('/register').post((req, res) => new agency_controller_1.AgencyController().register(req, res));
 agencyRouter.route('/addComment').post((req, res) => new agency_controller_1.AgencyController().addComment(req, res));
 agencyRouter.route('/editComment').post((req, res) => new agency_controller_1.AgencyController().editComment(req, res));
+agencyRouter.route('/deleteComment').post((req, res) => new agency_controller_1.AgencyController().deleteComment(req, res));
 agencyRouter.route('/modifyAgencyField').post((req, res) => new agency_controller_1.AgencyController().modifyAgencyField(req, res));
 agencyRouter.route('/deleteAgency').post((req, res) => new agency_controller_1.AgencyController().deleteAgency(req, res));
 agencyRouter.route('/getAllAgencies').get((req, res) => new agency_controller_1.AgencyController().getAllAgencies(req, res));

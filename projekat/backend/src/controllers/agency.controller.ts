@@ -168,6 +168,34 @@ export class AgencyController{
         })
     }
 
+    deleteComment = (req: express.Request, res: express.Response) => {
+        let agencyUsername = req.body.agencyUsername
+        let commentIndex = req.body.index
+
+        AgencyModel.findOne({ 'username' : agencyUsername }, (err, agency) => {
+            if(err) console.log(err)
+            else {
+                if(agency) {
+                    AgencyModel.updateOne(
+                        { 'username' : agencyUsername },
+                        { $unset: { 
+                            [`comments.${commentIndex}`]: ""
+                         } },
+                        (err, response) => {
+                            if(err) console.log(err)
+                            else {
+                                res.json({'msg': 'ok'})
+                            }
+                        }
+                    )
+                }
+                else {
+                    res.json({'msg': 'notFound'})
+                }
+            }
+        })
+    }
+
     modifyAgencyField = (req: express.Request, res: express.Response) => {
         let field = req.body.field
         let value = req.body.value

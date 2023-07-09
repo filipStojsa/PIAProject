@@ -70,7 +70,6 @@ export class GeneralComponent implements OnInit {
           return 1;
         }
       
-        // If addresses are the same, compare names
         if (a.agencyName < b.agencyName) {
           return -1;
         }
@@ -78,7 +77,7 @@ export class GeneralComponent implements OnInit {
           return 1;
         }
       
-        return 0; // addresses and names are equal
+        return 0;
       })
     }
     else {
@@ -90,7 +89,6 @@ export class GeneralComponent implements OnInit {
           return 1;
         }
       
-        // If addresses are the same, compare names
         if (a.agencyName > b.agencyName) {
           return -1;
         }
@@ -98,7 +96,7 @@ export class GeneralComponent implements OnInit {
           return 1;
         }
       
-        return 0; // addresses and names are equal
+        return 0;
       })
     }
   }

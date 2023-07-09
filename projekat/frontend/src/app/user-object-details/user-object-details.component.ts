@@ -180,4 +180,8 @@ export class UserObjectDetailsComponent implements OnInit {
     return newRoom
   }
 
+  goBack() {
+    this.router.navigate(['user/create_object']);
+  }
+
 }

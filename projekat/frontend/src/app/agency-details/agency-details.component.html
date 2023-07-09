@@ -77,12 +77,15 @@
 
           <h3>Comments</h3>
           <div *ngFor="let com of comments; let i = index" [attr.data-index]="i">
-            <ul class="list-group">
+            <ul class="list-group" *ngIf="com">
               <li class="list-group-item">
                 <strong>{{ com.user }}</strong> - Rating: {{ com.rating }} -
                 <i>{{ com.comment }}</i>
                 <button class="edit-button btn btn-primary" *ngIf="showButton(com.username)" (click)="editComment(i)">
                     Edit
+                </button>
+                <button class="delete-button btn btn-danger" *ngIf="showButton(com.username)" (click)="deleteComment(i)">
+                  X
                 </button>
               </li>
             </ul>

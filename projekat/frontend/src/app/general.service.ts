@@ -23,4 +23,12 @@ export class GeneralService {
 
     return this.http.post(`${this.uri}/agency/editComment`, data)
   }
+
+  deleteComment(agencyUsername: string, index: number) {
+    const data = {
+      agencyUsername: agencyUsername,
+      index: index
+    }
+    return this.http.post(`${this.uri}/agency/deleteComment`, data)
+  }
 }

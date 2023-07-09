@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit {
   messageUser = []
   messageAgency = []
 
+  confirmPassword: string
+
   onImageChange(event: any) {
     const img = document.createElement('img');
     const file = event.target.files[0];
@@ -72,13 +74,19 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    
-    // Check user's password validity
-    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.user.password)) {
-      this.messageUser[3] = "Password does not enforce the rules"
+    // Check if password is confirmed
+    if(this.user.password != this.confirmPassword) {
+      this.messageUser[3] = "Password is not confirmed!"
       isOK = false
     }
     
+    // Check user's password validity
+    if(!/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z][A-Za-z\d!@#$%^&*()\-_=+{};:,<.>]{5,10}$/.test(this.user.password)) {
+      this.messageUser[3] = "Password does not enforce the rules"
+      isOK = false
+    }
+    // ^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z][A-Za-z\d!@#$%^&*()\-_=+{};:,<.>]{5,10}$
+    // ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
     // Check user's telephone validity
     if(!/^(?:(?:\+|00)(?:\d{1,3})[\s-]?)?(?:\d{1,4}[\s-]?){1,5}\d{1,4}$/.test(this.user.tel)) {
       this.messageUser[4] = "Telephone is not in correct format"
@@ -140,10 +148,14 @@ export class RegisterComponent implements OnInit {
       isOK = false
     }
 
-    
+    // Check if password is confirmed
+    if(this.agency.password != this.confirmPassword) {
+      this.messageAgency[6] = "Password is not confirmed!"
+      isOK = false
+    }
 
     // Check user's password validity
-    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.agency.password)) {
+    if(!/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z][A-Za-z\d!@#$%^&*()\-_=+{};:,<.>]{5,10}$/.test(this.agency.password)) {
       this.messageAgency[6] = "Password does not enforce the rules"
       isOK = false
     }

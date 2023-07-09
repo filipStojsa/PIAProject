@@ -97,6 +97,20 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              [(ngModel)]="confirmPassword"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageUser[3] }}
+            </div>
+          </div>
+          <div class="form-group">
             <label for="tel">Telephone</label>
             <input
               type="tel"
@@ -244,6 +258,20 @@
               id="password"
               name="password"
               [(ngModel)]="agency.password"
+              class="form-control"
+              required
+            />
+            <div class="bold-red">
+              {{ messageAgency[6] }}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              [(ngModel)]="confirmPassword"
               class="form-control"
               required
             />

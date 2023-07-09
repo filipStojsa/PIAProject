@@ -1,0 +1,23 @@
+<body>
+    <div class="login-form">
+      <h2>Login for Admin</h2>
+  
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <button (click)="login()" class="btn btn-login">Log in</button>
+      
+      <br>
+      <a routerLink="register" class="btn btn-register">Register</a>
+      <br>
+      <div class="alert alert-danger" *ngIf="message">
+        {{message}}
+      </div>
+    </div>
+  </body>
+  

@@ -66,6 +66,18 @@ export class AgencyDetailsComponent implements OnInit {
     })
   }
 
+  deleteComment(comIndex) {
+    this.service.deleteComment(
+      this.agency.username,
+      comIndex
+    ).subscribe((resp) => {
+      if(resp['msg'] == 'ok') {
+        alert('Comment deleted!')
+        this.router.navigate(['general']);
+      }
+    })
+  }
+
   goBack() {
     if(JSON.parse(localStorage.getItem('loggedAgency'))) {
       this.router.navigate(['agency']);

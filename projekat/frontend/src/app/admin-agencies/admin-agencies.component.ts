@@ -100,14 +100,6 @@ export class AdminAgenciesComponent implements OnInit {
           isOK = false
           return
         }
-
-        this.registerService.checkIsUsernameUnique(value, 'agency').subscribe((resp) => {
-          if(resp['msg'] == 'false') {
-            alert("Username is not unique")
-            isOK = false
-            return
-          }
-        })
         break
 
       case 'tel':
@@ -130,15 +122,23 @@ export class AdminAgenciesComponent implements OnInit {
         break;
     }
 
-    this.service.changeAgencyField(
-      field,
-      value,
-      this.selectedAgency.username
-    ).subscribe((resp) => {
-      if(resp['msg'] == 'ok') {
-        alert(field + ' changed succesfuly!')
-        this.router.navigate(['admin']);
+    
+    this.registerService.checkIsUsernameUnique(value, 'agency').subscribe((resp) => {
+      if(resp['msg'] == 'false') {
+        alert("Username is not unique")
+        isOK = false
+        return
       }
+      this.service.changeAgencyField(
+        field,
+        value,
+        this.selectedAgency.username
+      ).subscribe((resp) => {
+        if(resp['msg'] == 'ok') {
+          alert(field + ' changed succesfuly!')
+          this.router.navigate(['admin']);
+        }
+      })
     })
   }
 
@@ -184,6 +184,10 @@ export class AdminAgenciesComponent implements OnInit {
         }
       })
     }
+  }
+
+  goBack() {
+    this.router.navigate(['admin']);
   }
 
   setWorkers(username: string) {

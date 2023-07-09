@@ -19,6 +19,7 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminJobsComponent } from './admin-jobs/admin-jobs.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { UserObjectDetailsComponent } from './user-object-details/user-object-details.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -40,7 +41,7 @@ const routes: Routes = [
   {path: "admin/jobs", component: AdminJobsComponent},
   {path: "change_password", component: ChangePasswordComponent},
   {path: "user/object/details", component: UserObjectDetailsComponent},
-  {path: "admin/login", component: LoginComponent}
+  {path: "admin/login", component: AdminLoginComponent}
 ];
 
 @NgModule({

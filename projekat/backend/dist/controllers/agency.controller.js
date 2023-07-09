@@ -159,6 +159,30 @@ class AgencyController {
                 }
             });
         };
+        this.deleteComment = (req, res) => {
+            let agencyUsername = req.body.agencyUsername;
+            let commentIndex = req.body.index;
+            agency_1.default.findOne({ 'username': agencyUsername }, (err, agency) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (agency) {
+                        agency_1.default.updateOne({ 'username': agencyUsername }, { $unset: {
+                                [`comments.${commentIndex}`]: ""
+                            } }, (err, response) => {
+                            if (err)
+                                console.log(err);
+                            else {
+                                res.json({ 'msg': 'ok' });
+                            }
+                        });
+                    }
+                    else {
+                        res.json({ 'msg': 'notFound' });
+                    }
+                }
+            });
+        };
         this.modifyAgencyField = (req, res) => {
             let field = req.body.field;
             let value = req.body.value;

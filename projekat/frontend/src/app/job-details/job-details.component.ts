@@ -130,11 +130,9 @@ export class JobDetailsComponent implements OnInit  {
     this.jobService.payJob(localStorage.getItem('jobId')).subscribe((resp) => {
       if(resp['msg'] == 'ok') {
 
-        // Find out how many workers agency now has
         this.jobService.getAgency(this.myJob.agencyUsername).subscribe((agency: Agency) => {
           let newWorkers = parseInt(agency.workers) + this.myJob.workers
 
-          // Add workers to agency
           this.jobService.changeAgencyField(
             'workers',
             newWorkers+'',
@@ -152,7 +150,6 @@ export class JobDetailsComponent implements OnInit  {
   }
 
   submitComment() {
-    // Process the selected score and comment
     let user: User = JSON.parse(localStorage.getItem('loggedUser'))
     this.jobService.addComment(
       this.selectedScore,

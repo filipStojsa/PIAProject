@@ -76,13 +76,7 @@ export class AdminUsersComponent implements OnInit {
           return
         }
 
-        this.registerService.checkIsUsernameUnique(value, 'user').subscribe((resp) => {
-          if(resp['msg'] == 'false') {
-            alert("Username is not unique")
-            isOK = false
-            return
-          }
-        })
+        
         break
 
       case 'tel':
@@ -105,15 +99,22 @@ export class AdminUsersComponent implements OnInit {
         break;
     }
     // Check is OK
-    this.service.changeUserField(
-      field,
-      value,
-      this.selectedUser.username
-    ).subscribe((resp) => {
-      if(resp['msg'] == 'ok') {
-        alert(field + ' changed succesfuly!')
-        this.router.navigate(['admin']);
+    this.registerService.checkIsUsernameUnique(value, 'user').subscribe((resp) => {
+      if(resp['msg'] == 'false') {
+        alert("Username is not unique")
+        isOK = false
+        return
       }
+      this.service.changeUserField(
+        field,
+        value,
+        this.selectedUser.username
+      ).subscribe((resp) => {
+        if(resp['msg'] == 'ok') {
+          alert(field + ' changed succesfuly!')
+          this.router.navigate(['admin']);
+        }
+      })
     })
   }
 
@@ -159,5 +160,9 @@ export class AdminUsersComponent implements OnInit {
         }
       })
     }
+  }
+
+  goBack() {
+    this.router.navigate(['admin']);
   }
 }

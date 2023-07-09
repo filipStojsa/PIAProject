@@ -17,6 +17,12 @@ body {
   right: 5px;
 
 }
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 60px;
+
+}
 
 .agency-details-row {
   background-color: #f6f6f6;
