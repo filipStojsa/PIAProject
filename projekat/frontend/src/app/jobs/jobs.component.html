@@ -30,6 +30,12 @@
       </table>
       <br />
       <button class="btn btn-success" (click)="goBack()">Go Back</button>
+      <hr>
+      <input type="checkbox" name="active-job" id="active-job" [(ngModel)]="active" (change)="filter()">Active jobs
+      <br>
+      <input type="checkbox" name="inProgress-job" id="inProgress-job" [(ngModel)]="inProgress" (change)="filter()">In Progress jobs
+      <br>
+      <input type="checkbox" name="finished-job" id="finished-job" [(ngModel)]="finished" (change)="filter()">Finished jobs
     </div>
   </div>
 </div>

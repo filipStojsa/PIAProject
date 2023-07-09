@@ -17,6 +17,8 @@ export class JobsComponent implements OnInit {
   loggedUsername: string
   myJobs = []
 
+  receivedJobs = []
+
   ngOnInit(): void {
     let tmp = []
     this.loggedUsername = JSON.parse(localStorage.getItem('loggedUser'))['username']
@@ -28,6 +30,7 @@ export class JobsComponent implements OnInit {
       });
 
       this.myJobs = jobs
+      this.receivedJobs = jobs
       localStorage.removeItem('jobId')
     })
 
@@ -52,5 +55,29 @@ export class JobsComponent implements OnInit {
     this.router.navigate(['user']);
   }
   
+  active: boolean = false
+  inProgress: boolean = false
+  finished: boolean = false
+
+  filter() {
+    if(this.active) {
+      this.myJobs = this.receivedJobs.filter(
+        job => job.jobStatus == 'active'
+      )
+    }
+    else if(this.inProgress) {
+      this.myJobs = this.receivedJobs.filter(
+        job => job.jobStatus == 'inProgress'
+      )
+    }
+    else if(this.finished) {
+      this.myJobs = this.receivedJobs.filter(
+        job => job.jobStatus == 'finished'
+      )
+    }
+    else {
+      this.myJobs = this.receivedJobs
+    }
+  }
 
 }
